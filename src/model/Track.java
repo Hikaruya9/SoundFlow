@@ -9,47 +9,31 @@ package model;
  * @author Aluno
  */
 public class Track {
-    private int artistId;
-    private String releaseId;
     private int id;
     private String title;
     private String trackLength;
+    private int artistId;
+    private int releaseId;
     private String releaseImagePath;
     
     public Track(){
         
     }
-
-    public Track(int artistId, String releaseId, int id, String title, String trackLength, String releaseImagePath) {
-        this.artistId = artistId;
-        this.releaseId = releaseId;
+    
+    public Track(int id, String title, String trackLength, int artistId, int releaseId, String releaseImagePath) {
         this.id = id;
         this.title = title;
         this.trackLength = trackLength;
+        this.artistId = artistId;
+        this.releaseId = releaseId;
         this.releaseImagePath = releaseImagePath;
     }
 
-    public int getArtistId() {
-        return artistId;
-    }
-
-    public void setArtistId(int artistId) {
-        this.artistId = artistId;
-    }
-
-    public String getReleaseId() {
-        return releaseId;
-    }
-
-    public void setReleaseId(String releaseId) {
-        this.releaseId = releaseId;
-    }
-
-    public int getTrackId() {
+    public int getId() {
         return id;
     }
 
-    public void setTrackId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,6 +53,22 @@ public class Track {
         this.trackLength = trackLength;
     }
 
+    public int getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(int artistId) {
+        this.artistId = artistId;
+    }
+
+    public int getReleaseId() {
+        return releaseId;
+    }
+
+    public void setReleaseId(int releaseId) {
+        this.releaseId = releaseId;
+    }
+    
     public String getReleaseImagePath() {
         return releaseImagePath;
     }

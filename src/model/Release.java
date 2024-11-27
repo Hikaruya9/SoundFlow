@@ -9,29 +9,25 @@ package model;
  * @author Aluno
  */
 public class Release {
-    private int artistId;
     private int id;
-    private String name;
-    private String date;
+    private String title;
+    private String releaseDate;
     private int trackNumber;
     private String length;
     private String imagePath;
+    private int artistId;
+    
+    public Release(){
+        
+    }
 
-    public Release(int artistId, int id, String name, String date, int trackNumber, String length, String imagePath) {
-        this.artistId = artistId;
+    public Release(int id, String title, String releaseDate, int trackNumber, String length, String imagePath, int artistId) {
         this.id = id;
-        this.name = name;
-        this.date = date;
+        this.title = title;
+        this.releaseDate = releaseDate;
         this.trackNumber = trackNumber;
         this.length = length;
         this.imagePath = imagePath;
-    }
-
-    public int getArtistId() {
-        return artistId;
-    }
-
-    public void setArtistId(int artistId) {
         this.artistId = artistId;
     }
 
@@ -43,20 +39,20 @@ public class Release {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDate() {
-        return date;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public int getTrackNumber() {
@@ -81,5 +77,13 @@ public class Release {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public int getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(int artistId) {
+        this.artistId = artistId;
     }
 }

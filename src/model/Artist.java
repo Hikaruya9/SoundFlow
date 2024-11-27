@@ -11,14 +11,18 @@ package model;
 public class Artist {
     private int id;
     private String name;
-    private String desc;
+    private String description;
     private String genre;
     private String imagePath;
+    
+    public Artist(){
+        
+    }
 
-    public Artist(int id, String name, String desc, String genre, String imagePath) {
+    public Artist(int id, String name, String description, String genre, String imagePath) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.genre = genre;
         this.imagePath = imagePath;
     }
@@ -39,12 +43,12 @@ public class Artist {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getGenre() {
