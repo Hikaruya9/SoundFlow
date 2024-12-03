@@ -5,6 +5,8 @@
 package connection;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
 
 /**
  *
@@ -12,5 +14,17 @@ import java.sql.Connection;
  */
 public class DB {
     
+    private static final String URL = "jdcb://mysql/localhost:3306/soundflow_project";
+    private static final String USER = "root";
+    private static final String PASSWORD = "root";
     
+    public static Connection getConnection(){
+        Connection connection = null;
+        try{
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        }catch(SQLException e){
+            System.out.println("Falha na tentativa de conexão ao servidor!\n"+e.getMessage());
+        }
+        return connection;
+    }
 }

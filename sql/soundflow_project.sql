@@ -7,19 +7,20 @@ USE soundflow;
 CREATE TABLE artist(
 id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 name varchar(100) NOT NULL,
-description text NOT NULL,
+about text NOT NULL,
 genre varchar(50) NOT NULL,
 image_path TINYTEXT NOT NULL
 )DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE artistRelease(
+CREATE TABLE artist_release(
 id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 title varchar(100) NOT NULL,
 release_date varchar(100) NOT NULL,
 track_number tinyint NOT NULL,
 release_length varchar(10) NOT NULL,
 image_path tinytext NOT NULL,
-artist_id int NOT NULL
+artist_id int NOT NULL,
+FOREIGN KEY (artist_id) REFERENCES artist(id)
 )DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE track(
@@ -28,5 +29,7 @@ title varchar(100) NOT NULL,
 track_length varchar(10) NOT NULL,
 artist_id int NOT NULL,
 release_id int NOT NULL,
-image_path tinytext NOT NULL
+audio_file tinytext NOT NULL,
+FOREIGN KEY (artist_id) REFERENCES artist(id),
+FOREIGN KEY (release_id) REFERENCES artist_release(id)
 )DEFAULT CHARSET=utf8mb4;
