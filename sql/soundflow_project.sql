@@ -7,8 +7,8 @@ USE soundflow;
 CREATE TABLE artist(
 id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 name varchar(100) NOT NULL,
-about text NOT NULL,
 genre varchar(50) NOT NULL,
+about text NOT NULL,
 image_path TINYTEXT NOT NULL
 )DEFAULT CHARSET=utf8mb4;
 

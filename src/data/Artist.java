@@ -11,19 +11,19 @@ package data;
 public class Artist {
     private int id;
     private String name;
-    private String about;
     private String genre;
+    private String about;
     private String imagePath;
     
     public Artist(){
         
     }
 
-    public Artist(int id, String name, String about, String genre, String imagePath) {
+    public Artist(int id, String name, String genre, String about, String imagePath) {
         this.id = id;
         this.name = name;
-        this.about = about;
         this.genre = genre;
+        this.about = about;
         this.imagePath = imagePath;
     }
 
@@ -42,6 +42,14 @@ public class Artist {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
     public String getAbout() {
         return about;
@@ -49,14 +57,6 @@ public class Artist {
 
     public void setAbout(String about) {
         this.about = about;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getImagePath() {
