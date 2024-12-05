@@ -4,12 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/img/In_the_Court_of_the_Crimson_King.jpeg</file>
+            <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/view/JUpdate.java</file>
+            <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/view/JMain.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/data/Track.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/model/TrackDAO.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/data/Release.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/model/ArtistDAO.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/connection/DB.java</file>
-            <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/view/JAddUpdate.java</file>
+            <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/view/JDelete.java</file>
+            <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/view/JAdd.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/data/Artist.java</file>
             <file>file:/C:/Users/Aluno/Documents/NetBeansProjects/SoundFlow/src/model/ReleaseDAO.java</file>
         </group>
