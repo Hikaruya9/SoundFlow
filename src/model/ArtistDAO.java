@@ -29,7 +29,7 @@ public class ArtistDAO {
             stmt.setString(i++, imagePath);
             stmt.executeUpdate();
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
     
@@ -43,7 +43,7 @@ public class ArtistDAO {
                 return Optional.of(a);
             }
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -59,7 +59,7 @@ public class ArtistDAO {
                 artists.add(a);
             }
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return artists;
     }
@@ -70,7 +70,7 @@ public class ArtistDAO {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -83,7 +83,7 @@ public class ArtistDAO {
             stmt.setInt(i++, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -96,7 +96,7 @@ public class ArtistDAO {
             stmt.setInt(i++, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -109,7 +109,7 @@ public class ArtistDAO {
             stmt.setInt(i++, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -122,12 +122,12 @@ public class ArtistDAO {
             stmt.setInt(i++, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
     
-    public boolean update(int id, String name, String genre, String about, String imagePath){
+    public boolean updateAll(int id, String name, String genre, String about, String imagePath){
         String sql = "UPDATE artist SET name = ?, about = ?, genre = ?, image_path = ? WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             int i = 1;
@@ -138,7 +138,7 @@ public class ArtistDAO {
             stmt.setInt(i++, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }

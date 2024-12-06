@@ -12,21 +12,21 @@ public class Track {
     private int id;
     private String title;
     private String trackLength;
+    private String audioFile;
     private int artistId;
     private int releaseId;
-    private String audioFile;
     
     public Track(){
         
     }
     
-    public Track(int id, String title, String trackLength, int artistId, int releaseId, String audioFile) {
+    public Track(int id, String title, String trackLength, String audioFile, int artistId, int releaseId) {
         this.id = id;
         this.title = title;
         this.trackLength = trackLength;
+        this.audioFile = audioFile;
         this.artistId = artistId;
         this.releaseId = releaseId;
-        this.audioFile = audioFile;
     }
 
     public int getId() {
@@ -60,14 +60,6 @@ public class Track {
     public void setArtistId(int artistId) {
         this.artistId = artistId;
     }
-
-    public int getReleaseId() {
-        return releaseId;
-    }
-
-    public void setReleaseId(int releaseId) {
-        this.releaseId = releaseId;
-    }
     
     public String getAudioFile() {
         return audioFile;
@@ -75,5 +67,13 @@ public class Track {
 
     public void setAudioFile(String audioFile) {
         this.audioFile = audioFile;
+    }
+
+    public int getReleaseId() {
+        return releaseId;
+    }
+
+    public void setReleaseId(int releaseId) {
+        this.releaseId = releaseId;
     }
 }

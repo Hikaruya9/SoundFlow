@@ -31,7 +31,7 @@ public class ReleaseDAO {
             stmt.setInt(i++, artistId);
             stmt.executeUpdate();
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
     
@@ -45,7 +45,7 @@ public class ReleaseDAO {
                 return Optional.of(r);
             }
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return Optional.empty();
     }
@@ -61,7 +61,7 @@ public class ReleaseDAO {
                 releases.add(r);
             }
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return releases;
     }
@@ -72,9 +72,104 @@ public class ReleaseDAO {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }
     
+    public boolean updateTitle(int id, String title) {
+        String sql = "UPDATE artist_release SET title = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, title);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateReleaseDate(int id, String releaseDate) {
+        String sql = "UPDATE artist_release SET release_date = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, releaseDate);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateTrackNumber(int id, int trackNumber) {
+        String sql = "UPDATE artist_release SET track_number = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setInt(i++, trackNumber);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateReleaseLength(int id, String releaseLength) {
+        String sql = "UPDATE artist_release SET title = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, releaseLength);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateImagePath(int id, String imagePath) {
+        String sql = "UPDATE artist_release SET title = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, imagePath);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateArtistId(int id, int artistId) {
+        String sql = "UPDATE artist_release SET title = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setInt(i++, artistId);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateAll(int id, String title, String releaseDate, int trackNumber, String releaseLength, String imagePath, int artistId) {
+        String sql = "UPDATE artist_release SET title = ?, release_date = ?, track_number = ?, release_length = ?, image_path = ?, artist_id = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, title);
+            stmt.setString(i++, releaseDate);
+            stmt.setInt(i++, trackNumber);
+            stmt.setString(i++, releaseLength);
+            stmt.setString(i++, imagePath);
+            stmt.setInt(i++, artistId);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }
