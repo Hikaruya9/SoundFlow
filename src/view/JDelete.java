@@ -58,9 +58,12 @@ public class JDelete extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tabArtist.setBackground(new java.awt.Color(51, 51, 51));
+        tabArtist.setForeground(new java.awt.Color(204, 204, 204));
         tabArtist.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         tabArtist.setToolTipText("");
         tabArtist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jPanel3.setBackground(new java.awt.Color(53, 53, 53));
 
         jLabel2.setText("ID");
 
