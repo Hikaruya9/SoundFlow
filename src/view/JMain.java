@@ -36,6 +36,14 @@ public class JMain extends javax.swing.JFrame {
         btnPlay = new javax.swing.JButton();
         lblTrackImage = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        txtCurrentlyPlayingTrack = new javax.swing.JTextField();
+        txtCurrentlyPlayingArtist = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jSlider1 = new javax.swing.JSlider();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,8 +53,14 @@ public class JMain extends javax.swing.JFrame {
 
         txtSearch.setBackground(new java.awt.Color(41, 40, 40));
         txtSearch.setForeground(new java.awt.Color(204, 204, 204));
+        txtSearch.setRequestFocusEnabled(false);
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtSearch);
-        txtSearch.setBounds(410, 30, 460, 40);
+        txtSearch.setBounds(410, 20, 460, 40);
 
         jProgressBar1.setBorder(null);
         jPanel1.add(jProgressBar1);
@@ -81,6 +95,37 @@ public class JMain extends javax.swing.JFrame {
         jPanel1.add(jLayeredPane1);
         jLayeredPane1.setBounds(304, 87, 100, 100);
 
+        txtCurrentlyPlayingTrack.setBackground(new java.awt.Color(5, 5, 5));
+        txtCurrentlyPlayingTrack.setText("music title");
+        txtCurrentlyPlayingTrack.setBorder(null);
+        txtCurrentlyPlayingTrack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCurrentlyPlayingTrackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCurrentlyPlayingTrack);
+        txtCurrentlyPlayingTrack.setBounds(90, 645, 270, 16);
+
+        txtCurrentlyPlayingArtist.setBackground(new java.awt.Color(5, 5, 5));
+        txtCurrentlyPlayingArtist.setText("artist");
+        txtCurrentlyPlayingArtist.setBorder(null);
+        jPanel1.add(txtCurrentlyPlayingArtist);
+        txtCurrentlyPlayingArtist.setBounds(90, 665, 64, 16);
+        jPanel1.add(jButton1);
+        jButton1.setBounds(570, 656, 30, 28);
+        jPanel1.add(jButton2);
+        jButton2.setBounds(1020, 660, 30, 28);
+        jPanel1.add(jButton3);
+        jButton3.setBounds(670, 656, 30, 28);
+        jPanel1.add(jButton4);
+        jButton4.setBounds(520, 656, 30, 28);
+
+        jSlider1.setFocusable(false);
+        jPanel1.add(jSlider1);
+        jSlider1.setBounds(1050, 665, 200, 22);
+        jPanel1.add(jButton5);
+        jButton5.setBounds(720, 656, 30, 28);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,6 +149,14 @@ public class JMain extends javax.swing.JFrame {
             checkPlayPause = false;
         }
     }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void txtCurrentlyPlayingTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCurrentlyPlayingTrackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCurrentlyPlayingTrackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,13 +199,22 @@ public class JMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlay;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JSlider jSlider1;
     private javax.swing.JLabel lblTrackImage;
+    private javax.swing.JTextField txtCurrentlyPlayingArtist;
+    private javax.swing.JTextField txtCurrentlyPlayingTrack;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
 
 // Trazer uma opção de copiar o id da música diretamente na pesquisa
 //// Fazer com que a página se adapte ao tamanho da tela do usuário.
+////// Funções do visual entram no controller(?)
