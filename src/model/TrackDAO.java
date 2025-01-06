@@ -74,4 +74,86 @@ public class TrackDAO {
             return false;
         }
     }
+    
+    public boolean updateTitle(int id, String title) {
+        String sql = "UPDATE track SET title = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, title);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateTrackNumber(int id, String trackLength) {
+        String sql = "UPDATE track SET track_length = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, trackLength);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateAudioFile(int id, String audioFile) {
+        String sql = "UPDATE track SET audio_file = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, audioFile);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateReleaseId(int id, String releaseId) {
+        String sql = "UPDATE track SET release_id = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, releaseId);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateArtistId(int id, int artistId) {
+        String sql = "UPDATE track SET artist_id = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setInt(i++, artistId);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean updateAll(int id, String title, String trackLength, String audioFile, int releaseId, int artistId) {
+        String sql = "UPDATE artist_release SET title = ?, track_length = ?, audio_file = ?, release_id = ?, artist_id = ? WHERE id = ?";
+        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
+            int i = 1;
+            stmt.setString(i++, title);
+            stmt.setString(i++, trackLength);
+            stmt.setString(i++, audioFile);
+            stmt.setInt(i++, releaseId);
+            stmt.setInt(i++, artistId);
+            stmt.setInt(i++, id);
+            return stmt.executeUpdate() > 0;
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

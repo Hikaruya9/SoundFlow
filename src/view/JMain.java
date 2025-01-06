@@ -4,20 +4,39 @@
  */
 package view;
 
-import java.awt.Image;
-import javax.imageio.ImageIO;
+import controller.ArtistController;
+import controller.ReleaseController;
+import controller.TrackController;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import jmusic.JMusicPlayer;
+import jmusic.JMusicPlayerList;
+import jmusic.JMusicSong;
+import jmusic.MusicPlayerControl;
+import model.ArtistDAO;
+import model.ReleaseDAO;
+import model.TrackDAO;
 
 /**
  *
  * @author Aluno
  */
 public class JMain extends javax.swing.JFrame {
+    
+    private ArtistController artistController;
+    private ReleaseController releaseController;
+    private TrackController trackController;
+    
+    private String imageBtnPlay = "/play.png";
 
     /**
      * Creates new form JMain
      */
-    public JMain() {
+    public JMain(ArtistController artistController, ReleaseController releaseController, TrackController trackController) {
+        this.artistController = artistController;
+        this.releaseController = releaseController;
+        this.trackController = trackController;
         initComponents();
     }
 
@@ -32,18 +51,22 @@ public class JMain extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        pgrBarSong = new javax.swing.JProgressBar();
         btnPlay = new javax.swing.JButton();
         lblTrackImage = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        txtCurrentlyPlayingTrack = new javax.swing.JTextField();
-        txtCurrentlyPlayingArtist = new javax.swing.JTextField();
+        txtCurrentTrack = new javax.swing.JTextField();
+        txtCurrentArtist = new javax.swing.JTextField();
+        btnPrevious = new javax.swing.JButton();
+        btnVolume = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnShuffle = new javax.swing.JButton();
+        sldVolume = new javax.swing.JSlider();
+        btnRepeat = new javax.swing.JButton();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
+        jPanel3 = new javax.swing.JPanel();
+        txtActualTime = new javax.swing.JTextField();
+        txtTotalTime = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
-        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,69 +85,177 @@ public class JMain extends javax.swing.JFrame {
         jPanel1.add(txtSearch);
         txtSearch.setBounds(410, 20, 460, 40);
 
-        jProgressBar1.setBorder(null);
-        jPanel1.add(jProgressBar1);
-        jProgressBar1.setBounds(410, 695, 460, 7);
+        pgrBarSong.setBorder(null);
+        jPanel1.add(pgrBarSong);
+        pgrBarSong.setBounds(410, 695, 460, 7);
 
         btnPlay.setBackground(new java.awt.Color(255, 255, 255));
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png"))); // NOI18N
         btnPlay.setRequestFocusEnabled(false);
+        btnPlay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPlayMouseClicked(evt);
+            }
+        });
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
             }
         });
         jPanel1.add(btnPlay);
-        btnPlay.setBounds(620, 650, 35, 35);
+        btnPlay.setBounds(620, 645, 35, 35);
 
-        lblTrackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/In_the_Court_of_the_Crimson_King.jpeg"))); // NOI18N
+        lblTrackImage.setIcon(new javax.swing.ImageIcon("E:\\Músicas\\SoundFlow\\cover\\King Crimson\\In The Court Of The Crimson King.jpeg")); // NOI18N
         jPanel1.add(lblTrackImage);
         lblTrackImage.setBounds(20, 640, 60, 60);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jLayeredPane1);
-        jLayeredPane1.setBounds(304, 87, 100, 100);
-
-        txtCurrentlyPlayingTrack.setBackground(new java.awt.Color(5, 5, 5));
-        txtCurrentlyPlayingTrack.setText("music title");
-        txtCurrentlyPlayingTrack.setBorder(null);
-        txtCurrentlyPlayingTrack.addActionListener(new java.awt.event.ActionListener() {
+        txtCurrentTrack.setBackground(new java.awt.Color(5, 5, 5));
+        txtCurrentTrack.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        txtCurrentTrack.setForeground(new java.awt.Color(240, 240, 240));
+        txtCurrentTrack.setText("music title");
+        txtCurrentTrack.setBorder(null);
+        txtCurrentTrack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCurrentlyPlayingTrackActionPerformed(evt);
+                txtCurrentTrackActionPerformed(evt);
             }
         });
-        jPanel1.add(txtCurrentlyPlayingTrack);
-        txtCurrentlyPlayingTrack.setBounds(90, 645, 270, 16);
+        jPanel1.add(txtCurrentTrack);
+        txtCurrentTrack.setBounds(90, 645, 270, 18);
 
-        txtCurrentlyPlayingArtist.setBackground(new java.awt.Color(5, 5, 5));
-        txtCurrentlyPlayingArtist.setText("artist");
-        txtCurrentlyPlayingArtist.setBorder(null);
-        jPanel1.add(txtCurrentlyPlayingArtist);
-        txtCurrentlyPlayingArtist.setBounds(90, 665, 64, 16);
+        txtCurrentArtist.setBackground(new java.awt.Color(5, 5, 5));
+        txtCurrentArtist.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtCurrentArtist.setForeground(new java.awt.Color(240, 240, 240));
+        txtCurrentArtist.setText("artist");
+        txtCurrentArtist.setBorder(null);
+        jPanel1.add(txtCurrentArtist);
+        txtCurrentArtist.setBounds(90, 665, 270, 16);
+
+        btnPrevious.setBackground(new java.awt.Color(5, 5, 5));
+        btnPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/previous.png"))); // NOI18N
+        btnPrevious.setBorder(null);
+        btnPrevious.setBorderPainted(false);
+        btnPrevious.setContentAreaFilled(false);
+        btnPrevious.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnPreviousMouseClicked(evt);
+            }
+        });
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPrevious);
+        btnPrevious.setBounds(570, 650, 30, 28);
+
+        btnVolume.setBackground(new java.awt.Color(5, 5, 5));
+        btnVolume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volume2.png"))); // NOI18N
+        btnVolume.setBorder(null);
+        btnVolume.setBorderPainted(false);
+        btnVolume.setContentAreaFilled(false);
+        btnVolume.setFocusPainted(false);
+        btnVolume.setFocusable(false);
+        btnVolume.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolumeMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnVolume);
+        btnVolume.setBounds(1020, 660, 30, 28);
+
+        btnNext.setBackground(new java.awt.Color(5, 5, 5));
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
+        btnNext.setBorder(null);
+        btnNext.setBorderPainted(false);
+        btnNext.setContentAreaFilled(false);
+        btnNext.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNextMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnNext);
+        btnNext.setBounds(670, 650, 30, 28);
+
+        btnShuffle.setBackground(new java.awt.Color(5, 5, 5));
+        btnShuffle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/shuffle.png"))); // NOI18N
+        btnShuffle.setBorder(null);
+        btnShuffle.setBorderPainted(false);
+        btnShuffle.setContentAreaFilled(false);
+        btnShuffle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnShuffleMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnShuffle);
+        btnShuffle.setBounds(520, 650, 30, 28);
+
+        sldVolume.setFocusable(false);
+        jPanel1.add(sldVolume);
+        sldVolume.setBounds(1050, 662, 200, 22);
+
+        btnRepeat.setBackground(new java.awt.Color(5, 5, 5));
+        btnRepeat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/repeat.png"))); // NOI18N
+        btnRepeat.setBorder(null);
+        btnRepeat.setBorderPainted(false);
+        btnRepeat.setContentAreaFilled(false);
+        btnRepeat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRepeatMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnRepeat);
+        btnRepeat.setBounds(720, 650, 30, 28);
+
+        jPanel3.setBackground(new java.awt.Color(20, 20, 20));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1254, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 534, Short.MAX_VALUE)
+        );
+
+        jLayeredPane2.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
+        jLayeredPane2.setLayout(jLayeredPane2Layout);
+        jLayeredPane2Layout.setHorizontalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jLayeredPane2Layout.setVerticalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jLayeredPane2);
+        jLayeredPane2.setBounds(10, 80, 1260, 540);
+
+        txtActualTime.setBackground(new java.awt.Color(5, 5, 5));
+        txtActualTime.setText("00:00");
+        txtActualTime.setBorder(null);
+        txtActualTime.setFocusable(false);
+        jPanel1.add(txtActualTime);
+        txtActualTime.setBounds(372, 690, 30, 15);
+
+        txtTotalTime.setBackground(new java.awt.Color(5, 5, 5));
+        txtTotalTime.setText("10:00");
+        txtTotalTime.setBorder(null);
+        txtTotalTime.setFocusable(false);
+        jPanel1.add(txtTotalTime);
+        txtTotalTime.setBounds(880, 690, 30, 15);
+
+        jButton1.setText(".\n.\n.");
         jPanel1.add(jButton1);
-        jButton1.setBounds(570, 656, 30, 28);
-        jPanel1.add(jButton2);
-        jButton2.setBounds(1020, 660, 30, 28);
-        jPanel1.add(jButton3);
-        jButton3.setBounds(670, 656, 30, 28);
-        jPanel1.add(jButton4);
-        jButton4.setBounds(520, 656, 30, 28);
-
-        jSlider1.setFocusable(false);
-        jPanel1.add(jSlider1);
-        jSlider1.setBounds(1050, 665, 200, 22);
-        jPanel1.add(jButton5);
-        jButton5.setBounds(720, 656, 30, 28);
+        jButton1.setBounds(880, 25, 30, 27);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,30 +271,73 @@ public class JMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        if(!checkPlayPause){
-            btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pause.png")));
-            checkPlayPause = true;
-        }else{
-            btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png")));
-            checkPlayPause = false;
-        }
-    }//GEN-LAST:event_btnPlayActionPerformed
-
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        
+
     }//GEN-LAST:event_txtSearchKeyPressed
 
-    private void txtCurrentlyPlayingTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCurrentlyPlayingTrackActionPerformed
+    private void txtCurrentTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCurrentTrackActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCurrentlyPlayingTrackActionPerformed
+    }//GEN-LAST:event_txtCurrentTrackActionPerformed
+
+    private void btnVolumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeMouseClicked
+        if (sldVolume.getValue() != 0){
+            sldVolume.setValue(0);
+        }
+    }//GEN-LAST:event_btnVolumeMouseClicked
+
+    private void btnRepeatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRepeatMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRepeatMouseClicked
+
+    private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
+        System.out.println("sim");
+    }//GEN-LAST:event_btnNextMouseClicked
+
+    private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
+        if (!MusicPlayerControl.isTheActualSongComplete()){
+            
+        }
+        
+        JMusicSong song = new JMusicSong(1, "King Crimson - Epitath", "Epitath", "King Crimson", "In The Court Of The Crimson King");
+        JMusicPlayerList musicList = new JMusicPlayerList();
+        musicList.addSongToPlayerList(song);
+        MusicPlayerControl.initMusicPlayer("E:/Músicas/SoundFlow/audio");
+        MusicPlayerControl.loadSongs(musicList);
+        
+
+        if (musicList.size() > 0 && imageBtnPlay.equals("/play.png")) {
+            MusicPlayerControl.playSong();
+            imageBtnPlay = "/pause.png";
+            btnPlay.setIcon(new ImageIcon(this.getClass().getResource(imageBtnPlay)));
+        } else if (imageBtnPlay.equals("/pause.png")){
+            MusicPlayerControl.stopSong();
+            imageBtnPlay = "/play.png";
+            btnPlay.setIcon(new ImageIcon(this.getClass().getResource(imageBtnPlay)));
+        } else {
+            JOptionPane.showMessageDialog(this, "Você precisa colocar uma música na fila antes de tocar!");
+        }
+    }//GEN-LAST:event_btnPlayMouseClicked
+
+    private void btnPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPreviousMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPreviousMouseClicked
+
+    private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnShuffleMouseClicked
+
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+
+    }//GEN-LAST:event_btnPlayActionPerformed
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPreviousActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
-    boolean checkPlayPause = false;
-    
+//    boolean checkPlayPause = false;
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -191,27 +365,40 @@ public class JMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JMain jmain = new JMain();
+                ArtistDAO artistDAO = new ArtistDAO();
+                ArtistController artistController = new ArtistController(artistDAO);
+                
+                ReleaseDAO releaseDAO = new ReleaseDAO();
+                ReleaseController releaseController = new ReleaseController(releaseDAO);
+                
+                TrackDAO trackDAO = new TrackDAO();
+                TrackController trackController = new TrackController(trackDAO);
+                
+                JMain jmain = new JMain(artistController, releaseController, trackController);
                 jmain.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPlay;
+    private javax.swing.JButton btnPrevious;
+    private javax.swing.JButton btnRepeat;
+    private javax.swing.JButton btnShuffle;
+    private javax.swing.JButton btnVolume;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JSlider jSlider1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblTrackImage;
-    private javax.swing.JTextField txtCurrentlyPlayingArtist;
-    private javax.swing.JTextField txtCurrentlyPlayingTrack;
+    private javax.swing.JProgressBar pgrBarSong;
+    private javax.swing.JSlider sldVolume;
+    private javax.swing.JTextField txtActualTime;
+    private javax.swing.JTextField txtCurrentArtist;
+    private javax.swing.JTextField txtCurrentTrack;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtTotalTime;
     // End of variables declaration//GEN-END:variables
 }
 
