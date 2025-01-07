@@ -7,9 +7,11 @@ package view;
 import controller.ArtistController;
 import controller.ReleaseController;
 import controller.TrackController;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import jmusic.JMusicPlayer;
 import jmusic.JMusicPlayerList;
 import jmusic.JMusicSong;
@@ -85,7 +87,12 @@ public class JMain extends javax.swing.JFrame {
         jPanel1.add(txtSearch);
         txtSearch.setBounds(410, 20, 460, 40);
 
+        pgrBarSong.setBackground(new java.awt.Color(30, 30, 30));
+        pgrBarSong.setForeground(new java.awt.Color(255, 255, 255));
         pgrBarSong.setBorder(null);
+        pgrBarSong.setFocusable(false);
+        pgrBarSong.setString("10%");
+        pgrBarSong.setStringPainted(true);
         jPanel1.add(pgrBarSong);
         pgrBarSong.setBounds(410, 695, 460, 7);
 
@@ -104,8 +111,6 @@ public class JMain extends javax.swing.JFrame {
         });
         jPanel1.add(btnPlay);
         btnPlay.setBounds(620, 645, 35, 35);
-
-        lblTrackImage.setIcon(new javax.swing.ImageIcon("E:\\Músicas\\SoundFlow\\cover\\King Crimson\\In The Court Of The Crimson King.jpeg")); // NOI18N
         jPanel1.add(lblTrackImage);
         lblTrackImage.setBounds(20, 640, 60, 60);
 
@@ -294,14 +299,14 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNextMouseClicked
 
     private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
-        if (!MusicPlayerControl.isTheActualSongComplete()){
-            
-        }
+//        if (!MusicPlayerControl.isTheActualSongComplete()){
+//            
+//        }
         
         JMusicSong song = new JMusicSong(1, "King Crimson - Epitath", "Epitath", "King Crimson", "In The Court Of The Crimson King");
         JMusicPlayerList musicList = new JMusicPlayerList();
         musicList.addSongToPlayerList(song);
-        MusicPlayerControl.initMusicPlayer("E:/Músicas/SoundFlow/audio");
+        MusicPlayerControl.initMusicPlayer("C:/Users/Aluno/Documents/res/audio"); // C:/Users/Aluno/Documents/res/audio // E:/Músicas/SoundFlow/audio
         MusicPlayerControl.loadSongs(musicList);
         
 
