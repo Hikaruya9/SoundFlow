@@ -25,7 +25,7 @@ public class ReleaseController {
         releaseDAO.add(title, releaseDate, trackNumber, length, imagePath, artistId);
     }
     
-    public Optional<Release> getById(int id){
+    public ArrayList<Release> getById(int id){
         return releaseDAO.getById(id);
     }
     

@@ -35,19 +35,20 @@ public class ReleaseDAO {
         }
     }
     
-    public Optional<Release> getById(int id){
+    public ArrayList<Release> getById(int id){
+        ArrayList<Release> release = new ArrayList();
         String sql = "SELECT id,title,release_date,track_number,release_length,image_path,artist_id FROM artist_release WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Release r = new Release(rs.getInt("id"), rs.getString("title"), rs.getString("release_date"), rs.getInt("track_number"), rs.getString("release_length"), rs.getString("image_path"), rs.getInt("artist_id"));
-                return Optional.of(r);
+                release.add(r);
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return Optional.empty();
+        return release;
     }
     
     public ArrayList<Release> getByTitle(String title){

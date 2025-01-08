@@ -33,12 +33,17 @@ public class JUpdate extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtArtistName = new javax.swing.JTextField();
+        txtArtistGenre = new javax.swing.JTextField();
+        txtArtistAvatarPath = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        txtArtistAbout = new javax.swing.JTextArea();
+        btnArtistUpdateAll = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtArtistDeleteID = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnArtistSearchID = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -46,28 +51,35 @@ public class JUpdate extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtReleaseTitle = new javax.swing.JTextField();
+        txtReleaseLength = new javax.swing.JTextField();
+        txtReleaseDate = new javax.swing.JTextField();
+        txtReleaseArtistID = new javax.swing.JTextField();
+        txtReleaseTrackNumber = new javax.swing.JTextField();
+        txtReleaseImagePath = new javax.swing.JTextField();
+        btnReleaseUpdateAll = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        txtReleaseDeleteID = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        btnReleaseSearchID = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        btnTrackUpdateAll = new javax.swing.JButton();
+        txtTrackTitle = new javax.swing.JTextField();
+        txtTrackLength = new javax.swing.JTextField();
+        txtTrackArtistID = new javax.swing.JTextField();
+        TxtTrackReleaseID = new javax.swing.JTextField();
+        txtTrackAudioFilePath = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        txtArtistDeleteID2 = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        btnTrackSearchID = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -77,249 +89,269 @@ public class JUpdate extends javax.swing.JFrame {
         tabArtist.setToolTipText("");
         tabArtist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(10, 10, 10));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Genre");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("About");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
-        jLabel5.setText("ImagePath");
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Avatar Image Path");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
 
-        jTextField2.setText("jTextField2");
+        txtArtistName.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistName.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtArtistName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 149, 28));
 
-        jTextField3.setText("jTextField3");
+        txtArtistGenre.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistGenre.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistGenre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtArtistGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 150, 28));
 
-        jTextField5.setText("jTextField5");
+        txtArtistAvatarPath.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistAvatarPath.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistAvatarPath.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtArtistAvatarPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 450, 28));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtArtistAbout.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistAbout.setColumns(20);
+        txtArtistAbout.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistAbout.setRows(5);
+        txtArtistAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtArtistAbout.setCaretColor(new java.awt.Color(51, 51, 51));
+        jScrollPane1.setViewportView(txtArtistAbout);
 
-        jButton1.setText("jButton1");
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 450, 120));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(jButton1)))
-                .addContainerGap(79, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(jButton1)
-                .addContainerGap(142, Short.MAX_VALUE))
-        );
+        btnArtistUpdateAll.setBackground(new java.awt.Color(55, 55, 55));
+        btnArtistUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
+        btnArtistUpdateAll.setText("Update All");
+        btnArtistUpdateAll.setFocusable(false);
+        jPanel2.add(btnArtistUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 125, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("ID");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
+
+        txtArtistDeleteID.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistDeleteID.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtArtistDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel2.add(txtArtistDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Name", "Genre", "About", "Avatar Path"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 480, 550, 155));
+
+        btnArtistSearchID.setBackground(new java.awt.Color(55, 55, 55));
+        btnArtistSearchID.setText("Search ID");
+        btnArtistSearchID.setFocusable(false);
+        jPanel2.add(btnArtistSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         tabArtist.addTab("Artist", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(10, 10, 10));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Title");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Length");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
 
-        jLabel9.setText("jLabel9");
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Release Date");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
-        jLabel10.setText("jLabel10");
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Artist ID");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, -1, -1));
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Track Number");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
 
-        jLabel12.setText("jLabel12");
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Cover Image Path");
+        jLabel12.setToolTipText("");
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
-        jTextField6.setText("jTextField6");
+        txtReleaseTitle.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseTitle.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel3.add(txtReleaseTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, 28));
 
-        jTextField7.setText("jTextField7");
+        txtReleaseLength.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseLength.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseLength.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel3.add(txtReleaseLength, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 161, 28));
 
-        jTextField8.setText("jTextField8");
+        txtReleaseDate.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseDate.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseDate.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel3.add(txtReleaseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 150, 28));
 
-        jTextField9.setText("jTextField9");
+        txtReleaseArtistID.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseArtistID.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseArtistID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtReleaseArtistID.setMinimumSize(new java.awt.Dimension(60, 26));
+        jPanel3.add(txtReleaseArtistID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 70, 28));
 
-        jTextField10.setText("jTextField10");
+        txtReleaseTrackNumber.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseTrackNumber.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseTrackNumber.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel3.add(txtReleaseTrackNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 70, 28));
 
-        jTextField11.setText("jTextField11");
+        txtReleaseImagePath.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseImagePath.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseImagePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel3.add(txtReleaseImagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 430, 28));
 
-        jButton3.setText("jButton3");
+        btnReleaseUpdateAll.setBackground(new java.awt.Color(55, 55, 55));
+        btnReleaseUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
+        btnReleaseUpdateAll.setText("Update All");
+        btnReleaseUpdateAll.setFocusable(false);
+        jPanel3.add(btnReleaseUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 125, -1));
 
-        jButton4.setText("jButton4");
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("ID");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
-                .addContainerGap(214, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
+        txtReleaseDeleteID.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseDeleteID.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtReleaseDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel3.add(txtReleaseDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title", "Release Date", "TrackNumber", "Length", "Image Path", "Artist ID"
+            }
+        ));
+        jTable2.setGridColor(new java.awt.Color(102, 102, 102));
+        jScrollPane3.setViewportView(jTable2);
+
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 480, 550, 155));
+
+        btnReleaseSearchID.setBackground(new java.awt.Color(55, 55, 55));
+        btnReleaseSearchID.setText("Search ID");
+        btnReleaseSearchID.setFocusable(false);
+        jPanel3.add(btnReleaseSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         tabArtist.addTab("Release", jPanel3);
 
+        jPanel4.setBackground(new java.awt.Color(10, 10, 10));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Title");
+        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Length");
+        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
 
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Artist ID");
+        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Release ID");
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
 
-        jLabel18.setText("Audio file");
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Audio File Path");
+        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
 
-        jButton2.setText("jButton2");
+        btnTrackUpdateAll.setBackground(new java.awt.Color(55, 55, 55));
+        btnTrackUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
+        btnTrackUpdateAll.setText("Update All");
+        btnTrackUpdateAll.setFocusable(false);
+        jPanel4.add(btnTrackUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 125, -1));
 
-        jTextField13.setText("jTextField13");
+        txtTrackTitle.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackTitle.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, 28));
 
-        jTextField14.setText("jTextField14");
+        txtTrackLength.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackLength.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackLength.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackLength, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 150, 28));
 
-        jTextField15.setText("jTextField15");
+        txtTrackArtistID.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackArtistID.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackArtistID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackArtistID, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 85, 28));
 
-        jTextField16.setText("jTextField16");
+        TxtTrackReleaseID.setBackground(new java.awt.Color(51, 51, 51));
+        TxtTrackReleaseID.setForeground(new java.awt.Color(255, 255, 255));
+        TxtTrackReleaseID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(TxtTrackReleaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 85, 28));
 
-        jTextField17.setText("jTextField17");
+        txtTrackAudioFilePath.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackAudioFilePath.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackAudioFilePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackAudioFilePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 415, 28));
 
-        jLabel6.setText("ID");
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("ID");
+        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
 
-        jTextField1.setText("jTextField1");
+        txtArtistDeleteID2.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistDeleteID2.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistDeleteID2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtArtistDeleteID2.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel4.add(txtArtistDeleteID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(271, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(jButton2)
-                .addGap(92, 92, 92))
-        );
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title", "Length", "Audio Path", "Artist ID", "Release ID"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable3);
+
+        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 480, 550, 155));
+
+        btnTrackSearchID.setBackground(new java.awt.Color(55, 55, 55));
+        btnTrackSearchID.setText("Search ID");
+        btnTrackSearchID.setFocusable(false);
+        jPanel4.add(btnTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         tabArtist.addTab("Track", jPanel4);
 
@@ -385,18 +417,23 @@ public class JUpdate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JTextField TxtTrackReleaseID;
+    private javax.swing.JButton btnArtistSearchID;
+    private javax.swing.JButton btnArtistUpdateAll;
+    private javax.swing.JButton btnReleaseSearchID;
+    private javax.swing.JButton btnReleaseUpdateAll;
+    private javax.swing.JButton btnTrackSearchID;
+    private javax.swing.JButton btnTrackUpdateAll;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -410,22 +447,29 @@ public class JUpdate extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTabbedPane tabArtist;
+    private javax.swing.JTextArea txtArtistAbout;
+    private javax.swing.JTextField txtArtistAvatarPath;
+    private javax.swing.JTextField txtArtistDeleteID;
+    private javax.swing.JTextField txtArtistDeleteID2;
+    private javax.swing.JTextField txtArtistGenre;
+    private javax.swing.JTextField txtArtistName;
+    private javax.swing.JTextField txtReleaseArtistID;
+    private javax.swing.JTextField txtReleaseDate;
+    private javax.swing.JTextField txtReleaseDeleteID;
+    private javax.swing.JTextField txtReleaseImagePath;
+    private javax.swing.JTextField txtReleaseLength;
+    private javax.swing.JTextField txtReleaseTitle;
+    private javax.swing.JTextField txtReleaseTrackNumber;
+    private javax.swing.JTextField txtTrackArtistID;
+    private javax.swing.JTextField txtTrackAudioFilePath;
+    private javax.swing.JTextField txtTrackLength;
+    private javax.swing.JTextField txtTrackTitle;
     // End of variables declaration//GEN-END:variables
 }

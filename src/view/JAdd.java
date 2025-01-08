@@ -4,16 +4,32 @@
  */
 package view;
 
+import controller.ArtistController;
+import controller.ReleaseController;
+import controller.TrackController;
+import javax.swing.JOptionPane;
+import model.ArtistDAO;
+import model.ReleaseDAO;
+import model.TrackDAO;
+
+
 /**
  *
  * @author Aluno
  */
 public class JAdd extends javax.swing.JFrame {
 
+    private ArtistController artistController;
+    private ReleaseController releaseController;
+    private TrackController trackController;
+    
     /**
      * Creates new form JAddUpdate
      */
-    public JAdd() {
+    public JAdd(ArtistController artistController, ReleaseController releaseController, TrackController trackController) {
+        this.artistController = artistController;
+        this.releaseController = releaseController;
+        this.trackController = trackController;
         initComponents();
     }
 
@@ -35,10 +51,10 @@ public class JAdd extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtArtistName = new javax.swing.JTextField();
         txtArtistGenre = new javax.swing.JTextField();
-        txtArtistAvatarPath = new javax.swing.JTextField();
+        txtArtistImagePath = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtArtistAbout = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        areaArtistAbout = new javax.swing.JTextArea();
+        btnArtistAdd = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -52,19 +68,19 @@ public class JAdd extends javax.swing.JFrame {
         txtReleaseArtistID = new javax.swing.JTextField();
         txtReleaseTrackNumber = new javax.swing.JTextField();
         txtReleaseImagePath = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnReleaseAdd = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnTrackAdd = new javax.swing.JButton();
         txtTrackTitle = new javax.swing.JTextField();
         txtTrackLength = new javax.swing.JTextField();
         txtTrackArtistID = new javax.swing.JTextField();
-        TxtTrackReleaseID = new javax.swing.JTextField();
-        txtTrackAudioFilePath = new javax.swing.JTextField();
+        txtTrackReleaseID = new javax.swing.JTextField();
+        txtTrackAudioFile = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -105,26 +121,31 @@ public class JAdd extends javax.swing.JFrame {
         txtArtistGenre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel2.add(txtArtistGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 47, 150, 28));
 
-        txtArtistAvatarPath.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistAvatarPath.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistAvatarPath.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(txtArtistAvatarPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 450, 28));
+        txtArtistImagePath.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistImagePath.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistImagePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.add(txtArtistImagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 450, 28));
 
-        txtArtistAbout.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistAbout.setColumns(20);
-        txtArtistAbout.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistAbout.setRows(5);
-        txtArtistAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtArtistAbout.setCaretColor(new java.awt.Color(51, 51, 51));
-        jScrollPane1.setViewportView(txtArtistAbout);
+        areaArtistAbout.setBackground(new java.awt.Color(51, 51, 51));
+        areaArtistAbout.setColumns(20);
+        areaArtistAbout.setForeground(new java.awt.Color(255, 255, 255));
+        areaArtistAbout.setRows(5);
+        areaArtistAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        areaArtistAbout.setCaretColor(new java.awt.Color(51, 51, 51));
+        jScrollPane1.setViewportView(areaArtistAbout);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 113, 450, 120));
 
-        jButton1.setBackground(new java.awt.Color(55, 55, 55));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
-        jButton1.setFocusable(false);
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 325, 125, -1));
+        btnArtistAdd.setBackground(new java.awt.Color(55, 55, 55));
+        btnArtistAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnArtistAdd.setText("Add");
+        btnArtistAdd.setFocusable(false);
+        btnArtistAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnArtistAddMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnArtistAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 325, 125, -1));
 
         tabArtist.addTab("Artist", jPanel2);
 
@@ -187,11 +208,16 @@ public class JAdd extends javax.swing.JFrame {
         txtReleaseImagePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel3.add(txtReleaseImagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 430, 28));
 
-        jButton3.setBackground(new java.awt.Color(55, 55, 55));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Add");
-        jButton3.setFocusable(false);
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 285, 125, -1));
+        btnReleaseAdd.setBackground(new java.awt.Color(55, 55, 55));
+        btnReleaseAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnReleaseAdd.setText("Add");
+        btnReleaseAdd.setFocusable(false);
+        btnReleaseAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReleaseAddMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnReleaseAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 285, 125, -1));
 
         tabArtist.addTab("Release", jPanel3);
 
@@ -218,11 +244,16 @@ public class JAdd extends javax.swing.JFrame {
         jLabel18.setText("Audio File Path");
         jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 200, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(55, 55, 55));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Add");
-        jButton2.setFocusable(false);
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 285, 125, -1));
+        btnTrackAdd.setBackground(new java.awt.Color(55, 55, 55));
+        btnTrackAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnTrackAdd.setText("Add");
+        btnTrackAdd.setFocusable(false);
+        btnTrackAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTrackAddMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnTrackAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 285, 125, -1));
 
         txtTrackTitle.setBackground(new java.awt.Color(51, 51, 51));
         txtTrackTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,15 +270,15 @@ public class JAdd extends javax.swing.JFrame {
         txtTrackArtistID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel4.add(txtTrackArtistID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 85, 28));
 
-        TxtTrackReleaseID.setBackground(new java.awt.Color(51, 51, 51));
-        TxtTrackReleaseID.setForeground(new java.awt.Color(255, 255, 255));
-        TxtTrackReleaseID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(TxtTrackReleaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 85, 28));
+        txtTrackReleaseID.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackReleaseID.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackReleaseID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackReleaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 85, 28));
 
-        txtTrackAudioFilePath.setBackground(new java.awt.Color(51, 51, 51));
-        txtTrackAudioFilePath.setForeground(new java.awt.Color(255, 255, 255));
-        txtTrackAudioFilePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(txtTrackAudioFilePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 220, 415, 28));
+        txtTrackAudioFile.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackAudioFile.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackAudioFile.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackAudioFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 220, 415, 28));
 
         tabArtist.addTab("Track", jPanel4);
 
@@ -277,6 +308,57 @@ public class JAdd extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnArtistAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistAddMouseClicked
+        String name = txtArtistName.getText();
+        String genre = txtArtistGenre.getText();
+        String about = areaArtistAbout.getText();
+        String imagePath = txtArtistImagePath.getText();
+        
+        artistController.add(name, genre, about, imagePath);
+        
+        JOptionPane.showMessageDialog(this, "Artista salvo!");
+        txtArtistName.setText("");
+        txtArtistGenre.setText("");
+        areaArtistAbout.setText("");
+        txtArtistImagePath.setText("");
+    }//GEN-LAST:event_btnArtistAddMouseClicked
+
+    private void btnReleaseAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseAddMouseClicked
+        String title = txtReleaseTitle.getText();
+        String releaseDate = txtReleaseDate.getText();
+        int trackNumber = Integer.valueOf(txtReleaseTrackNumber.getText());
+        String length = txtReleaseLength.getText();
+        String imagePath = txtReleaseImagePath.getText();
+        int artistId = Integer.valueOf(txtReleaseArtistID.getText());
+        
+        releaseController.add(title, releaseDate, trackNumber, length, imagePath, artistId);
+        
+        JOptionPane.showMessageDialog(this, "Lançamento salvo!");
+        txtReleaseTitle.setText("");
+        txtReleaseDate.setText("");
+        txtReleaseTrackNumber.setText("");
+        txtReleaseLength.setText("");
+        txtReleaseImagePath.setText("");
+        txtReleaseArtistID.setText("");
+    }//GEN-LAST:event_btnReleaseAddMouseClicked
+
+    private void btnTrackAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackAddMouseClicked
+        String title = txtTrackTitle.getText();
+        String trackLength = txtTrackLength.getText();
+        String audioFile = txtTrackAudioFile.getText();
+        int artistId = Integer.valueOf(txtTrackArtistID.getText());
+        int releaseId = Integer.valueOf(txtTrackReleaseID.getText());
+        
+        trackController.add(title, trackLength, audioFile, artistId, releaseId);
+        
+        JOptionPane.showMessageDialog(this, "Música salva!");
+        txtTrackTitle.setText("");
+        txtTrackLength.setText("");
+        txtTrackAudioFile.setText("");
+        txtTrackArtistID.setText("");
+        txtTrackReleaseID.setText("");
+    }//GEN-LAST:event_btnTrackAddMouseClicked
 
     /**
      * @param args the command line arguments
@@ -309,16 +391,26 @@ public class JAdd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JAdd().setVisible(true);
+                ArtistDAO artistDAO = new ArtistDAO();
+                ArtistController artistController = new ArtistController(artistDAO);
+                
+                ReleaseDAO releaseDAO = new ReleaseDAO();
+                ReleaseController releaseController = new ReleaseController(releaseDAO);
+                
+                TrackDAO trackDAO = new TrackDAO();
+                TrackController trackController = new TrackController(trackDAO);
+                
+                JAdd jadd = new JAdd(artistController, releaseController, trackController);
+                jadd.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtTrackReleaseID;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextArea areaArtistAbout;
+    private javax.swing.JButton btnArtistAdd;
+    private javax.swing.JButton btnReleaseAdd;
+    private javax.swing.JButton btnTrackAdd;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -340,9 +432,8 @@ public class JAdd extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane tabArtist;
-    private javax.swing.JTextArea txtArtistAbout;
-    private javax.swing.JTextField txtArtistAvatarPath;
     private javax.swing.JTextField txtArtistGenre;
+    private javax.swing.JTextField txtArtistImagePath;
     private javax.swing.JTextField txtArtistName;
     private javax.swing.JTextField txtReleaseArtistID;
     private javax.swing.JTextField txtReleaseDate;
@@ -351,8 +442,9 @@ public class JAdd extends javax.swing.JFrame {
     private javax.swing.JTextField txtReleaseTitle;
     private javax.swing.JTextField txtReleaseTrackNumber;
     private javax.swing.JTextField txtTrackArtistID;
-    private javax.swing.JTextField txtTrackAudioFilePath;
+    private javax.swing.JTextField txtTrackAudioFile;
     private javax.swing.JTextField txtTrackLength;
+    private javax.swing.JTextField txtTrackReleaseID;
     private javax.swing.JTextField txtTrackTitle;
     // End of variables declaration//GEN-END:variables
 }

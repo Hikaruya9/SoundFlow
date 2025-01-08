@@ -6,7 +6,6 @@ package controller;
 
 import data.Track;
 import java.util.ArrayList;
-import java.util.Optional;
 import model.TrackDAO;
 
 /**
@@ -25,7 +24,7 @@ public class TrackController {
         trackDAO.add(title, trackLength, audioFile, artistId, releaseId);
     }
     
-    public Optional<Track> getById(int id){
+    public ArrayList<Track> getById(int id){
         return trackDAO.getById(id);
     }
     

@@ -19,13 +19,13 @@ import java.util.Optional;
  */
 public class ArtistDAO {
     
-    public void add(int id, String name, String about, String genre, String imagePath){
+    public void add(String name, String genre, String about, String imagePath){
         String sql = "INSERT INTO artist(name,genre,about,image_path) VALUES(?,?,?,?)";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             int i = 1;
             stmt.setString(i++, name);
-            stmt.setString(i++, about);
             stmt.setString(i++, genre);
+            stmt.setString(i++, about);
             stmt.setString(i++, imagePath);
             stmt.executeUpdate();
         }catch(SQLException e){
@@ -33,19 +33,20 @@ public class ArtistDAO {
         }
     }
     
-    public Optional<Artist> getById(int id){
+    public ArrayList<Artist> getById(int id){
+        ArrayList<Artist> artist = new ArrayList();
         String sql = "SELECT id,name,genre,about,image_path FROM artist WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Artist a = new Artist(rs.getInt("id"),rs.getString("name"),rs.getString("genre"),rs.getString("about"),rs.getString("image_path"));
-                return Optional.of(a);
+                artist.add(a);
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return Optional.empty();
+        return artist;
     }
     
     public ArrayList<Artist> getByName(String name){

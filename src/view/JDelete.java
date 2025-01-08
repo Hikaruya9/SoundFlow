@@ -4,16 +4,36 @@
  */
 package view;
 
+import controller.ArtistController;
+import controller.ReleaseController;
+import controller.TrackController;
+import data.Artist;
+import data.Release;
+import data.Track;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ArtistDAO;
+import model.ReleaseDAO;
+import model.TrackDAO;
+
 /**
  *
  * @author Aluno
  */
 public class JDelete extends javax.swing.JFrame {
+    
+    private ArtistController artistController;
+    private ReleaseController releaseController;
+    private TrackController trackController;
 
     /**
      * Creates new form JDelete
      */
-    public JDelete() {
+    public JDelete(ArtistController artistController, ReleaseController releaseController, TrackController trackController) {
+        this.artistController = artistController;
+        this.releaseController = releaseController;
+        this.trackController = trackController;
         initComponents();
     }
 
@@ -32,10 +52,10 @@ public class JDelete extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtArtistDeleteID = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnArtistRemove = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        tblArtist = new javax.swing.JTable();
+        btnArtistSearchID = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtReleaseDeleteID = new javax.swing.JTextField();
@@ -45,7 +65,7 @@ public class JDelete extends javax.swing.JFrame {
         btnReleaseSearchID = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        txtArtistDeleteID2 = new javax.swing.JTextField();
+        txtTrackDeleteID = new javax.swing.JTextField();
         btnTrackDelete = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -73,21 +93,27 @@ public class JDelete extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(10, 10, 10));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("ID");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+
+        txtArtistDeleteID.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistDeleteID.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtArtistDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
         jPanel3.add(txtArtistDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 62, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(55, 55, 55));
-        jButton1.setText("Remove");
-        jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        btnArtistRemove.setBackground(new java.awt.Color(55, 55, 55));
+        btnArtistRemove.setText("Remove");
+        btnArtistRemove.setFocusable(false);
+        btnArtistRemove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnArtistRemoveMouseClicked(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        jPanel3.add(btnArtistRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblArtist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -95,55 +121,72 @@ public class JDelete extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Genre", "About", "Avatar Path"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblArtist);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 315, 155));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 315, 155));
 
-        jButton2.setBackground(new java.awt.Color(55, 55, 55));
-        jButton2.setText("Search ID");
-        jButton2.setFocusable(false);
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 62, -1, -1));
+        btnArtistSearchID.setBackground(new java.awt.Color(55, 55, 55));
+        btnArtistSearchID.setText("Search ID");
+        btnArtistSearchID.setFocusable(false);
+        btnArtistSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnArtistSearchIDMouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnArtistSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 62, -1, -1));
 
         tabArtist.addTab("Artist", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(10, 10, 10));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("ID");
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+
+        txtReleaseDeleteID.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseDeleteID.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtReleaseDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
         jPanel4.add(txtReleaseDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 62, -1, -1));
 
         btnReleaseDelete.setBackground(new java.awt.Color(55, 55, 55));
         btnReleaseDelete.setText("Remove");
         btnReleaseDelete.setFocusable(false);
-        btnReleaseDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReleaseDeleteActionPerformed(evt);
+        btnReleaseDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReleaseDeleteMouseClicked(evt);
             }
         });
         jPanel4.add(btnReleaseDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title", "Release Date", "TrackNumber", "Length", "Image Path", "Artist ID"
             }
         ));
+        jTable2.setGridColor(new java.awt.Color(102, 102, 102));
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 315, 155));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 315, 155));
 
         btnReleaseSearchID.setBackground(new java.awt.Color(55, 55, 55));
         btnReleaseSearchID.setText("Search ID");
         btnReleaseSearchID.setFocusable(false);
+        btnReleaseSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReleaseSearchIDMouseClicked(evt);
+            }
+        });
         jPanel4.add(btnReleaseSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 62, -1, -1));
 
         tabArtist.addTab("Release", jPanel4);
@@ -151,38 +194,49 @@ public class JDelete extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(10, 10, 10));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("ID");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
-        jPanel5.add(txtArtistDeleteID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 62, -1, -1));
+
+        txtTrackDeleteID.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackDeleteID.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtTrackDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel5.add(txtTrackDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 62, -1, -1));
 
         btnTrackDelete.setBackground(new java.awt.Color(55, 55, 55));
         btnTrackDelete.setText("Remove");
         btnTrackDelete.setFocusable(false);
-        btnTrackDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTrackDeleteActionPerformed(evt);
+        btnTrackDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTrackDeleteMouseClicked(evt);
             }
         });
         jPanel5.add(btnTrackDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title", "Length", "Audio Path", "Artist ID", "Release ID"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
 
-        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 315, 155));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 315, 155));
 
         btnTrackSearchID.setBackground(new java.awt.Color(55, 55, 55));
         btnTrackSearchID.setText("Search ID");
         btnTrackSearchID.setFocusable(false);
+        btnTrackSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTrackSearchIDMouseClicked(evt);
+            }
+        });
         jPanel5.add(btnTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 62, -1, -1));
 
         tabArtist.addTab("Track", jPanel5);
@@ -191,13 +245,11 @@ public class JDelete extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(tabArtist, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tabArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabArtist)
+            .addComponent(tabArtist, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,18 +266,78 @@ public class JDelete extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnArtistSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistSearchIDMouseClicked
+        int id = Integer.valueOf(txtArtistDeleteID.getText());
+        fillTableArtist(artistController.getById(id));
+    }//GEN-LAST:event_btnArtistSearchIDMouseClicked
 
-    private void btnReleaseDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReleaseDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReleaseDeleteActionPerformed
+    private void btnArtistRemoveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistRemoveMouseClicked
 
-    private void btnTrackDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrackDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTrackDeleteActionPerformed
+    }//GEN-LAST:event_btnArtistRemoveMouseClicked
 
+    private void btnReleaseSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseSearchIDMouseClicked
+        int id = Integer.valueOf(txtReleaseDeleteID.getText());
+        fillTableRelease(releaseController.getById(id));
+    }//GEN-LAST:event_btnReleaseSearchIDMouseClicked
+
+    private void btnReleaseDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseDeleteMouseClicked
+
+    }//GEN-LAST:event_btnReleaseDeleteMouseClicked
+
+    private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
+        int id = Integer.valueOf(txtTrackDeleteID.getText());
+        fillTableTrack(trackController.getById(id));
+    }//GEN-LAST:event_btnTrackSearchIDMouseClicked
+
+    private void btnTrackDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackDeleteMouseClicked
+
+    }//GEN-LAST:event_btnTrackDeleteMouseClicked
+
+    public void fillTableArtist(ArrayList<Artist> artist) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Genre");
+        model.addColumn("About");
+        model.addColumn("Image Path");
+
+        for (Artist a : artist) {
+            model.addRow(new Object[]{a.getId(), a.getName(), a.getName(), a.getGenre(), a.getAbout(), a.getImagePath()});
+        }
+        tblArtist.setModel(model);
+    }
+    
+    public void fillTableRelease(ArrayList<Release> release) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Title");
+        model.addColumn("Release Date");
+        model.addColumn("Track Number");
+        model.addColumn("Length");
+        model.addColumn("Image Path");
+        model.addColumn("Artist ID");
+
+        for (Release r : release) {
+            model.addRow(new Object[]{r.getId(), r.getTitle(), r.getReleaseDate(), r.getTrackNumber(), r.getLength(), r.getImagePath(), r.getArtistId()});
+        }
+        tblArtist.setModel(model);
+    }
+    
+    public void fillTableTrack(ArrayList<Track> track) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Title");
+        model.addColumn("Track Length");
+        model.addColumn("Audio File");
+        model.addColumn("Artist ID");
+        model.addColumn("Release ID");
+
+        for (Track t : track) {
+            model.addRow(new Object[]{t.getId(), t.getTitle(), t.getTrackLength(), t.getAudioFile(), t.getArtistId(), t.getReleaseId()});
+        }
+        tblArtist.setModel(model);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -256,18 +368,28 @@ public class JDelete extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JDelete().setVisible(true);
+                ArtistDAO artistDAO = new ArtistDAO();
+                ArtistController artistController = new ArtistController(artistDAO);
+                
+                ReleaseDAO releaseDAO = new ReleaseDAO();
+                ReleaseController releaseController = new ReleaseController(releaseDAO);
+                
+                TrackDAO trackDAO = new TrackDAO();
+                TrackController trackController = new TrackController(trackDAO);
+                
+                JDelete jdelete = new JDelete(artistController, releaseController, trackController);
+                jdelete.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnArtistRemove;
+    private javax.swing.JButton btnArtistSearchID;
     private javax.swing.JButton btnReleaseDelete;
     private javax.swing.JButton btnReleaseSearchID;
     private javax.swing.JButton btnTrackDelete;
     private javax.swing.JButton btnTrackSearchID;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -279,12 +401,12 @@ public class JDelete extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTabbedPane tabArtist;
+    private javax.swing.JTable tblArtist;
     private javax.swing.JTextField txtArtistDeleteID;
-    private javax.swing.JTextField txtArtistDeleteID2;
     private javax.swing.JTextField txtReleaseDeleteID;
+    private javax.swing.JTextField txtTrackDeleteID;
     // End of variables declaration//GEN-END:variables
 }

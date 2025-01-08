@@ -23,11 +23,11 @@ public class ArtistController {
         this.artistDAO = artistDAO;
     }
     
-    public void add(int id, String name, String about, String genre, String imagePath) {
-        artistDAO.add(id, name, about, genre, imagePath);
+    public void add(String name, String about, String genre, String imagePath) {
+        artistDAO.add(name, about, genre, imagePath);
     }
     
-    public Optional<Artist> getById(int id){
+    public ArrayList<Artist> getById(int id){
         return artistDAO.getById(id);
     }
     

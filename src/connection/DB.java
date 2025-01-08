@@ -14,14 +14,14 @@ import java.sql.DriverManager;
  */
 public class DB {
     
-    private static final String URL = "jdcb://mysql/localhost:3306/soundflow_project";
+    private static final String URL = "jdbc:mysql://localhost:3306/soundflow";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASS = "root";
     
     public static Connection getConnection(){
         Connection connection = null;
         try{
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = DriverManager.getConnection(URL, USER, PASS);
         }catch(SQLException e){
             System.out.println("Falha na tentativa de conexão ao servidor!\n"+e.getMessage());
         }

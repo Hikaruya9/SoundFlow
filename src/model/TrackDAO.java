@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  *
@@ -28,24 +27,26 @@ public class TrackDAO {
             stmt.setString(i++, audioFile);
             stmt.setInt(i++, artistId);
             stmt.setInt(i++, releaseId);
+            stmt.executeUpdate();
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
     }
     
-    public Optional<Track> getById(int id){
+    public ArrayList<Track> getById(int id){
+        ArrayList<Track> track = new ArrayList();
         String sql = "SELECT id,title,track_length,audio_file,artist_id,release_id FROM track WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("audio_file"), rs.getString("track_length"), rs.getInt("artist_id"), rs.getInt("release_id"));
-                return Optional.of(t);
+                track.add(t);
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return Optional.empty();
+        return track;
     }
     
     public ArrayList<Track> getByTitle(String title){
