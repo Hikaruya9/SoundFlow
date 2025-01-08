@@ -33,3 +33,7 @@ release_id int NOT NULL,
 FOREIGN KEY (artist_id) REFERENCES artist(id),
 FOREIGN KEY (release_id) REFERENCES artist_release(id)
 )DEFAULT CHARSET=utf8mb4;
+
+SELECT * FROM artist;
+SELECT * FROM artist_release;
+SELECT * FROM track;
