@@ -129,7 +129,7 @@ public class ArtistDAO {
     }
     
     public boolean updateAll(int id, String name, String genre, String about, String imagePath){
-        String sql = "UPDATE artist SET name = ?, about = ?, genre = ?, image_path = ? WHERE id = ?";
+        String sql = "UPDATE artist SET name = ?, genre = ?, about = ?, image_path = ? WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             int i = 1;
             stmt.setString(i++, name);

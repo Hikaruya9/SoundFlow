@@ -4,16 +4,36 @@
  */
 package view;
 
+import controller.ArtistController;
+import controller.ReleaseController;
+import controller.TrackController;
+import data.Artist;
+import data.Release;
+import data.Track;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ArtistDAO;
+import model.ReleaseDAO;
+import model.TrackDAO;
+
 /**
  *
  * @author Aluno
  */
 public class JUpdate extends javax.swing.JFrame {
 
+    private ArtistController artistController;
+    private ReleaseController releaseController;
+    private TrackController trackController;
+
     /**
      * Creates new form JAddUpdate
      */
-    public JUpdate() {
+    public JUpdate(ArtistController artistController, ReleaseController releaseController, TrackController trackController) {
+        this.artistController = artistController;
+        this.releaseController = releaseController;
+        this.trackController = trackController;
         initComponents();
     }
 
@@ -40,9 +60,9 @@ public class JUpdate extends javax.swing.JFrame {
         txtArtistAbout = new javax.swing.JTextArea();
         btnArtistUpdateAll = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtArtistDeleteID = new javax.swing.JTextField();
+        txtArtistSearchID = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblArtist = new javax.swing.JTable();
         btnArtistSearchID = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -59,9 +79,9 @@ public class JUpdate extends javax.swing.JFrame {
         txtReleaseImagePath = new javax.swing.JTextField();
         btnReleaseUpdateAll = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        txtReleaseDeleteID = new javax.swing.JTextField();
+        txtReleaseSearchID = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblRelease = new javax.swing.JTable();
         btnReleaseSearchID = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -73,12 +93,12 @@ public class JUpdate extends javax.swing.JFrame {
         txtTrackTitle = new javax.swing.JTextField();
         txtTrackLength = new javax.swing.JTextField();
         txtTrackArtistID = new javax.swing.JTextField();
-        TxtTrackReleaseID = new javax.swing.JTextField();
+        txtTrackReleaseID = new javax.swing.JTextField();
         txtTrackAudioFilePath = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        txtArtistDeleteID2 = new javax.swing.JTextField();
+        txtTrackSearchID = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblTrack = new javax.swing.JTable();
         btnTrackSearchID = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,19 +157,24 @@ public class JUpdate extends javax.swing.JFrame {
         btnArtistUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
         btnArtistUpdateAll.setText("Update All");
         btnArtistUpdateAll.setFocusable(false);
+        btnArtistUpdateAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnArtistUpdateAllMouseClicked(evt);
+            }
+        });
         jPanel2.add(btnArtistUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 125, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("ID");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
 
-        txtArtistDeleteID.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistDeleteID.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtArtistDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
-        jPanel2.add(txtArtistDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+        txtArtistSearchID.setBackground(new java.awt.Color(51, 51, 51));
+        txtArtistSearchID.setForeground(new java.awt.Color(255, 255, 255));
+        txtArtistSearchID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtArtistSearchID.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel2.add(txtArtistSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblArtist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -160,13 +185,18 @@ public class JUpdate extends javax.swing.JFrame {
                 "Name", "Genre", "About", "Avatar Path"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblArtist);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 480, 550, 155));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 550, 155));
 
         btnArtistSearchID.setBackground(new java.awt.Color(55, 55, 55));
         btnArtistSearchID.setText("Search ID");
         btnArtistSearchID.setFocusable(false);
+        btnArtistSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnArtistSearchIDMouseClicked(evt);
+            }
+        });
         jPanel2.add(btnArtistSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         tabArtist.addTab("Artist", jPanel2);
@@ -234,19 +264,24 @@ public class JUpdate extends javax.swing.JFrame {
         btnReleaseUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
         btnReleaseUpdateAll.setText("Update All");
         btnReleaseUpdateAll.setFocusable(false);
+        btnReleaseUpdateAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReleaseUpdateAllMouseClicked(evt);
+            }
+        });
         jPanel3.add(btnReleaseUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 125, -1));
 
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("ID");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
 
-        txtReleaseDeleteID.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseDeleteID.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseDeleteID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtReleaseDeleteID.setPreferredSize(new java.awt.Dimension(70, 26));
-        jPanel3.add(txtReleaseDeleteID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+        txtReleaseSearchID.setBackground(new java.awt.Color(51, 51, 51));
+        txtReleaseSearchID.setForeground(new java.awt.Color(255, 255, 255));
+        txtReleaseSearchID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtReleaseSearchID.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel3.add(txtReleaseSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblRelease.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -257,14 +292,19 @@ public class JUpdate extends javax.swing.JFrame {
                 "Title", "Release Date", "TrackNumber", "Length", "Image Path", "Artist ID"
             }
         ));
-        jTable2.setGridColor(new java.awt.Color(102, 102, 102));
-        jScrollPane3.setViewportView(jTable2);
+        tblRelease.setGridColor(new java.awt.Color(102, 102, 102));
+        jScrollPane3.setViewportView(tblRelease);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 480, 550, 155));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 550, 155));
 
         btnReleaseSearchID.setBackground(new java.awt.Color(55, 55, 55));
         btnReleaseSearchID.setText("Search ID");
         btnReleaseSearchID.setFocusable(false);
+        btnReleaseSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReleaseSearchIDMouseClicked(evt);
+            }
+        });
         jPanel3.add(btnReleaseSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         tabArtist.addTab("Release", jPanel3);
@@ -296,6 +336,11 @@ public class JUpdate extends javax.swing.JFrame {
         btnTrackUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
         btnTrackUpdateAll.setText("Update All");
         btnTrackUpdateAll.setFocusable(false);
+        btnTrackUpdateAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTrackUpdateAllMouseClicked(evt);
+            }
+        });
         jPanel4.add(btnTrackUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 125, -1));
 
         txtTrackTitle.setBackground(new java.awt.Color(51, 51, 51));
@@ -313,10 +358,10 @@ public class JUpdate extends javax.swing.JFrame {
         txtTrackArtistID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel4.add(txtTrackArtistID, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 85, 28));
 
-        TxtTrackReleaseID.setBackground(new java.awt.Color(51, 51, 51));
-        TxtTrackReleaseID.setForeground(new java.awt.Color(255, 255, 255));
-        TxtTrackReleaseID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(TxtTrackReleaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 85, 28));
+        txtTrackReleaseID.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackReleaseID.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackReleaseID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel4.add(txtTrackReleaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 85, 28));
 
         txtTrackAudioFilePath.setBackground(new java.awt.Color(51, 51, 51));
         txtTrackAudioFilePath.setForeground(new java.awt.Color(255, 255, 255));
@@ -327,13 +372,13 @@ public class JUpdate extends javax.swing.JFrame {
         jLabel19.setText("ID");
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
 
-        txtArtistDeleteID2.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistDeleteID2.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistDeleteID2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtArtistDeleteID2.setPreferredSize(new java.awt.Dimension(70, 26));
-        jPanel4.add(txtArtistDeleteID2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+        txtTrackSearchID.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackSearchID.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackSearchID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        txtTrackSearchID.setPreferredSize(new java.awt.Dimension(70, 26));
+        jPanel4.add(txtTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblTrack.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -344,13 +389,18 @@ public class JUpdate extends javax.swing.JFrame {
                 "Title", "Length", "Audio Path", "Artist ID", "Release ID"
             }
         ));
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(tblTrack);
 
-        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 480, 550, 155));
+        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 550, 155));
 
         btnTrackSearchID.setBackground(new java.awt.Color(55, 55, 55));
         btnTrackSearchID.setText("Search ID");
         btnTrackSearchID.setFocusable(false);
+        btnTrackSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTrackSearchIDMouseClicked(evt);
+            }
+        });
         jPanel4.add(btnTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
 
         tabArtist.addTab("Track", jPanel4);
@@ -379,6 +429,135 @@ public class JUpdate extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnArtistSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistSearchIDMouseClicked
+        int id = Integer.valueOf(txtArtistSearchID.getText());
+        fillTableArtist(artistController.getById(id));
+        txtArtistSearchID.setText("");
+    }//GEN-LAST:event_btnArtistSearchIDMouseClicked
+
+    private void btnReleaseSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseSearchIDMouseClicked
+        int id = Integer.valueOf(txtReleaseSearchID.getText());
+        fillTableRelease(releaseController.getById(id));
+        txtReleaseSearchID.setText("");
+    }//GEN-LAST:event_btnReleaseSearchIDMouseClicked
+
+    private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
+        int id = Integer.valueOf(txtTrackSearchID.getText());
+        fillTableTrack(trackController.getById(id));
+        txtTrackSearchID.setText("");
+    }//GEN-LAST:event_btnTrackSearchIDMouseClicked
+
+    private void btnArtistUpdateAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistUpdateAllMouseClicked
+        int id = Integer.valueOf(txtArtistSearchID.getText());
+        String name = txtArtistName.getText();
+        String genre = txtArtistGenre.getText();
+        String about = txtArtistAbout.getText();
+        String avatarPath = txtArtistAvatarPath.getText();
+
+        if (artistController.updateAll(id, name, genre, about, avatarPath)) {
+            JOptionPane.showMessageDialog(this, "Artista atualizado!");
+            fillTableArtist(artistController.getById(id));
+            txtArtistSearchID.setText("");
+            txtArtistName.setText("");
+            txtArtistGenre.setText("");
+            txtArtistAbout.setText("");
+            txtArtistAvatarPath.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "ID não encontrado!");
+        }
+    }//GEN-LAST:event_btnArtistUpdateAllMouseClicked
+
+    private void btnReleaseUpdateAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseUpdateAllMouseClicked
+        int id = Integer.valueOf(txtReleaseSearchID.getText());
+        String title = txtReleaseTitle.getText();
+        String releaseDate = txtReleaseDate.getText();
+        int trackNumber = Integer.valueOf(txtReleaseTrackNumber.getText());
+        String length = txtReleaseLength.getText();
+        String avatarPath = txtArtistAvatarPath.getText();
+        int artistId = Integer.valueOf(txtReleaseArtistID.getText());
+
+        if (releaseController.updateAll(id, title, releaseDate, trackNumber, length, avatarPath, artistId)) {
+            JOptionPane.showMessageDialog(this, "Lançamento atualizado!");
+            fillTableRelease(releaseController.getById(id));
+            txtReleaseSearchID.setText("");
+            txtReleaseTitle.setText("");
+            txtReleaseDate.setText("");
+            txtReleaseTrackNumber.setText("");
+            txtReleaseLength.setText("");
+            txtReleaseImagePath.setText("");
+            txtReleaseArtistID.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "ID não encontrado!");
+        }
+    }//GEN-LAST:event_btnReleaseUpdateAllMouseClicked
+
+    private void btnTrackUpdateAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackUpdateAllMouseClicked
+        int id = Integer.valueOf(txtTrackSearchID.getText());
+        String title = txtTrackTitle.getText();
+        String length = txtTrackLength.getText();
+        String audioPath = txtTrackAudioFilePath.getText();
+        int releaseId = Integer.valueOf(txtTrackReleaseID.getText());
+        int artistId = Integer.valueOf(txtTrackArtistID.getText());
+
+        if (trackController.updateAll(id, title, length, audioPath, releaseId, artistId)) {
+            JOptionPane.showMessageDialog(this, "Música atualizada!");
+            fillTableTrack(trackController.getById(id));
+            txtTrackSearchID.setText("");
+            txtTrackTitle.setText("");
+            txtTrackLength.setText("");
+            txtTrackAudioFilePath.setText("");
+            txtTrackReleaseID.setText("");
+            txtTrackArtistID.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "ID não encontrado!");
+        }
+    }//GEN-LAST:event_btnTrackUpdateAllMouseClicked
+
+    public void fillTableArtist(ArrayList<Artist> artist) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Genre");
+        model.addColumn("About");
+        model.addColumn("Image Path");
+
+        for (Artist a : artist) {
+            model.addRow(new Object[]{a.getId(), a.getName(), a.getGenre(), a.getAbout(), a.getImagePath()});
+        }
+        tblArtist.setModel(model);
+    }
+
+    public void fillTableRelease(ArrayList<Release> release) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Title");
+        model.addColumn("Release Date");
+        model.addColumn("Track Number");
+        model.addColumn("Length");
+        model.addColumn("Image Path");
+        model.addColumn("Artist ID");
+
+        for (Release r : release) {
+            model.addRow(new Object[]{r.getId(), r.getTitle(), r.getReleaseDate(), r.getTrackNumber(), r.getLength(), r.getImagePath(), r.getArtistId()});
+        }
+        tblRelease.setModel(model);
+    }
+
+    public void fillTableTrack(ArrayList<Track> track) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Title");
+        model.addColumn("Length");
+        model.addColumn("Audio File");
+        model.addColumn("Artist ID");
+        model.addColumn("Release ID");
+
+        for (Track t : track) {
+            model.addRow(new Object[]{t.getId(), t.getTitle(), t.getTrackLength(), t.getAudioFile(), t.getArtistId(), t.getReleaseId()});
+        }
+        tblTrack.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
@@ -411,13 +590,22 @@ public class JUpdate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JUpdate().setVisible(true);
+                ArtistDAO artistDAO = new ArtistDAO();
+                ArtistController artistController = new ArtistController(artistDAO);
+
+                ReleaseDAO releaseDAO = new ReleaseDAO();
+                ReleaseController releaseController = new ReleaseController(releaseDAO);
+
+                TrackDAO trackDAO = new TrackDAO();
+                TrackController trackController = new TrackController(trackDAO);
+
+                JUpdate jupdate = new JUpdate(artistController, releaseController, trackController);
+                jupdate.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtTrackReleaseID;
     private javax.swing.JButton btnArtistSearchID;
     private javax.swing.JButton btnArtistUpdateAll;
     private javax.swing.JButton btnReleaseSearchID;
@@ -450,26 +638,27 @@ public class JUpdate extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTabbedPane tabArtist;
+    private javax.swing.JTable tblArtist;
+    private javax.swing.JTable tblRelease;
+    private javax.swing.JTable tblTrack;
     private javax.swing.JTextArea txtArtistAbout;
     private javax.swing.JTextField txtArtistAvatarPath;
-    private javax.swing.JTextField txtArtistDeleteID;
-    private javax.swing.JTextField txtArtistDeleteID2;
     private javax.swing.JTextField txtArtistGenre;
     private javax.swing.JTextField txtArtistName;
+    private javax.swing.JTextField txtArtistSearchID;
     private javax.swing.JTextField txtReleaseArtistID;
     private javax.swing.JTextField txtReleaseDate;
-    private javax.swing.JTextField txtReleaseDeleteID;
     private javax.swing.JTextField txtReleaseImagePath;
     private javax.swing.JTextField txtReleaseLength;
+    private javax.swing.JTextField txtReleaseSearchID;
     private javax.swing.JTextField txtReleaseTitle;
     private javax.swing.JTextField txtReleaseTrackNumber;
     private javax.swing.JTextField txtTrackArtistID;
     private javax.swing.JTextField txtTrackAudioFilePath;
     private javax.swing.JTextField txtTrackLength;
+    private javax.swing.JTextField txtTrackReleaseID;
+    private javax.swing.JTextField txtTrackSearchID;
     private javax.swing.JTextField txtTrackTitle;
     // End of variables declaration//GEN-END:variables
 }

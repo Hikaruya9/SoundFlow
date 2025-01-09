@@ -61,14 +61,14 @@ public class JDelete extends javax.swing.JFrame {
         txtReleaseDeleteID = new javax.swing.JTextField();
         btnReleaseDelete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblRelease = new javax.swing.JTable();
         btnReleaseSearchID = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtTrackDeleteID = new javax.swing.JTextField();
         btnTrackDelete = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblTrack = new javax.swing.JTable();
         btnTrackSearchID = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -163,7 +163,7 @@ public class JDelete extends javax.swing.JFrame {
         });
         jPanel4.add(btnReleaseDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblRelease.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -174,8 +174,8 @@ public class JDelete extends javax.swing.JFrame {
                 "Title", "Release Date", "TrackNumber", "Length", "Image Path", "Artist ID"
             }
         ));
-        jTable2.setGridColor(new java.awt.Color(102, 102, 102));
-        jScrollPane2.setViewportView(jTable2);
+        tblRelease.setGridColor(new java.awt.Color(102, 102, 102));
+        jScrollPane2.setViewportView(tblRelease);
 
         jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 315, 155));
 
@@ -214,7 +214,7 @@ public class JDelete extends javax.swing.JFrame {
         });
         jPanel5.add(btnTrackDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblTrack.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -225,7 +225,7 @@ public class JDelete extends javax.swing.JFrame {
                 "Title", "Length", "Audio Path", "Artist ID", "Release ID"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblTrack);
 
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 315, 155));
 
@@ -269,28 +269,67 @@ public class JDelete extends javax.swing.JFrame {
     private void btnArtistSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistSearchIDMouseClicked
         int id = Integer.valueOf(txtArtistDeleteID.getText());
         fillTableArtist(artistController.getById(id));
+        txtArtistDeleteID.setText("");
     }//GEN-LAST:event_btnArtistSearchIDMouseClicked
 
     private void btnArtistRemoveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistRemoveMouseClicked
-
+        int resposta = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir esse artista?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if(resposta == JOptionPane.YES_OPTION) {
+            int id = Integer.valueOf(txtArtistDeleteID.getText());
+            if(artistController.delete(id)) {
+                JOptionPane.showMessageDialog(this, "Artista excluído!");
+                fillTableArtist(artistController.getById(id));
+            }else{
+                JOptionPane.showMessageDialog(this, "ID não encontrado!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Tome mais cuidado na próxima vez!");
+        }
+        txtArtistDeleteID.setText("");
     }//GEN-LAST:event_btnArtistRemoveMouseClicked
 
     private void btnReleaseSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseSearchIDMouseClicked
         int id = Integer.valueOf(txtReleaseDeleteID.getText());
         fillTableRelease(releaseController.getById(id));
+        txtReleaseDeleteID.setText("");
     }//GEN-LAST:event_btnReleaseSearchIDMouseClicked
 
     private void btnReleaseDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseDeleteMouseClicked
-
+        int resposta = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir esse lançamento?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if(resposta == JOptionPane.YES_OPTION) {
+            int id = Integer.valueOf(txtReleaseDeleteID.getText());
+            if(releaseController.delete(id)) {
+                JOptionPane.showMessageDialog(this, "Lançamento excluído!");
+                fillTableRelease(releaseController.getById(id));
+            }else{
+                JOptionPane.showMessageDialog(this, "ID não encontrado!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Tome mais cuidado na próxima vez!");
+        }
+        txtReleaseDeleteID.setText("");
     }//GEN-LAST:event_btnReleaseDeleteMouseClicked
 
     private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
         int id = Integer.valueOf(txtTrackDeleteID.getText());
         fillTableTrack(trackController.getById(id));
+        txtTrackDeleteID.setText("");
     }//GEN-LAST:event_btnTrackSearchIDMouseClicked
 
     private void btnTrackDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackDeleteMouseClicked
-
+        int resposta = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir essa música?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if(resposta == JOptionPane.YES_OPTION) {
+            int id = Integer.valueOf(txtTrackDeleteID.getText());
+            if(trackController.delete(id)) {
+                JOptionPane.showMessageDialog(this, "Música excluída!");
+                fillTableTrack(trackController.getById(id));
+            }else{
+                JOptionPane.showMessageDialog(this, "ID não encontrado!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Tome mais cuidado na próxima vez!");
+        }
+        txtTrackDeleteID.setText("");
     }//GEN-LAST:event_btnTrackDeleteMouseClicked
 
     public void fillTableArtist(ArrayList<Artist> artist) {
@@ -302,7 +341,7 @@ public class JDelete extends javax.swing.JFrame {
         model.addColumn("Image Path");
 
         for (Artist a : artist) {
-            model.addRow(new Object[]{a.getId(), a.getName(), a.getName(), a.getGenre(), a.getAbout(), a.getImagePath()});
+            model.addRow(new Object[]{a.getId(), a.getName(), a.getGenre(), a.getAbout(), a.getImagePath()});
         }
         tblArtist.setModel(model);
     }
@@ -320,7 +359,7 @@ public class JDelete extends javax.swing.JFrame {
         for (Release r : release) {
             model.addRow(new Object[]{r.getId(), r.getTitle(), r.getReleaseDate(), r.getTrackNumber(), r.getLength(), r.getImagePath(), r.getArtistId()});
         }
-        tblArtist.setModel(model);
+        tblRelease.setModel(model);
     }
     
     public void fillTableTrack(ArrayList<Track> track) {
@@ -335,7 +374,7 @@ public class JDelete extends javax.swing.JFrame {
         for (Track t : track) {
             model.addRow(new Object[]{t.getId(), t.getTitle(), t.getTrackLength(), t.getAudioFile(), t.getArtistId(), t.getReleaseId()});
         }
-        tblArtist.setModel(model);
+        tblTrack.setModel(model);
     }
     
     /**
@@ -401,10 +440,10 @@ public class JDelete extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTabbedPane tabArtist;
     private javax.swing.JTable tblArtist;
+    private javax.swing.JTable tblRelease;
+    private javax.swing.JTable tblTrack;
     private javax.swing.JTextField txtArtistDeleteID;
     private javax.swing.JTextField txtReleaseDeleteID;
     private javax.swing.JTextField txtTrackDeleteID;

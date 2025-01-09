@@ -40,7 +40,7 @@ public class TrackDAO {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("audio_file"), rs.getString("track_length"), rs.getInt("artist_id"), rs.getInt("release_id"));
+                Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("track_length"), rs.getString("audio_file"), rs.getInt("artist_id"), rs.getInt("release_id"));
                 track.add(t);
             }
         }catch(SQLException e){
@@ -142,7 +142,7 @@ public class TrackDAO {
     }
     
     public boolean updateAll(int id, String title, String trackLength, String audioFile, int releaseId, int artistId) {
-        String sql = "UPDATE artist_release SET title = ?, track_length = ?, audio_file = ?, release_id = ?, artist_id = ? WHERE id = ?";
+        String sql = "UPDATE track SET title = ?, track_length = ?, audio_file = ?, release_id = ?, artist_id = ? WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             int i = 1;
             stmt.setString(i++, title);

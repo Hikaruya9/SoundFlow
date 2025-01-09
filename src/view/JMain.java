@@ -25,11 +25,11 @@ import model.TrackDAO;
  * @author Aluno
  */
 public class JMain extends javax.swing.JFrame {
-    
+
     private ArtistController artistController;
     private ReleaseController releaseController;
     private TrackController trackController;
-    
+
     private String imageBtnPlay = "/play.png";
 
     /**
@@ -68,7 +68,9 @@ public class JMain extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         txtActualTime = new javax.swing.JTextField();
         txtTotalTime = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,9 +260,38 @@ public class JMain extends javax.swing.JFrame {
         jPanel1.add(txtTotalTime);
         txtTotalTime.setBounds(880, 690, 30, 15);
 
-        jButton1.setText(".\n.\n.");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(880, 25, 30, 27);
+        btnDelete.setBackground(new java.awt.Color(50, 50, 50));
+        btnDelete.setText("D");
+        btnDelete.setFocusable(false);
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnDelete);
+        btnDelete.setBounds(250, 27, 37, 27);
+
+        btnAdd.setBackground(new java.awt.Color(50, 50, 50));
+        btnAdd.setText("A");
+        btnAdd.setFocusable(false);
+        btnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnAdd);
+        btnAdd.setBounds(350, 27, 37, 27);
+
+        btnUpdate.setBackground(new java.awt.Color(50, 50, 50));
+        btnUpdate.setText("U");
+        btnUpdate.setFocusable(false);
+        btnUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateMouseClicked(evt);
+            }
+        });
+        jPanel1.add(btnUpdate);
+        btnUpdate.setBounds(300, 27, 37, 27);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -285,7 +316,7 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCurrentTrackActionPerformed
 
     private void btnVolumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeMouseClicked
-        if (sldVolume.getValue() != 0){
+        if (sldVolume.getValue() != 0) {
             sldVolume.setValue(0);
         }
     }//GEN-LAST:event_btnVolumeMouseClicked
@@ -302,19 +333,18 @@ public class JMain extends javax.swing.JFrame {
 //        if (!MusicPlayerControl.isTheActualSongComplete()){
 //            
 //        }
-        
+
         JMusicSong song = new JMusicSong(1, "King Crimson - Epitath", "Epitath", "King Crimson", "In The Court Of The Crimson King");
         JMusicPlayerList musicList = new JMusicPlayerList();
         musicList.addSongToPlayerList(song);
         MusicPlayerControl.initMusicPlayer("C:/Users/Aluno/Documents/res/audio"); // C:/Users/Aluno/Documents/res/audio // E:/Músicas/SoundFlow/audio
         MusicPlayerControl.loadSongs(musicList);
-        
 
         if (musicList.size() > 0 && imageBtnPlay.equals("/play.png")) {
             MusicPlayerControl.playSong();
             imageBtnPlay = "/pause.png";
             btnPlay.setIcon(new ImageIcon(this.getClass().getResource(imageBtnPlay)));
-        } else if (imageBtnPlay.equals("/pause.png")){
+        } else if (imageBtnPlay.equals("/pause.png")) {
             MusicPlayerControl.stopSong();
             imageBtnPlay = "/play.png";
             btnPlay.setIcon(new ImageIcon(this.getClass().getResource(imageBtnPlay)));
@@ -338,6 +368,27 @@ public class JMain extends javax.swing.JFrame {
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPreviousActionPerformed
+
+    private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
+        JAdd jadd = new JAdd(artistController, releaseController, trackController);
+        jadd.setLocationRelativeTo(jadd);
+        jadd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jadd.setVisible(true);
+    }//GEN-LAST:event_btnAddMouseClicked
+
+    private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
+        JUpdate jupdate = new JUpdate(artistController, releaseController, trackController);
+        jupdate.setLocationRelativeTo(jupdate);
+        jupdate.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jupdate.setVisible(true);
+    }//GEN-LAST:event_btnUpdateMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        JDelete jdelete = new JDelete(artistController, releaseController, trackController);
+        jdelete.setLocationRelativeTo(jdelete);
+        jdelete.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jdelete.setVisible(true);
+    }//GEN-LAST:event_btnDeleteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -372,13 +423,13 @@ public class JMain extends javax.swing.JFrame {
             public void run() {
                 ArtistDAO artistDAO = new ArtistDAO();
                 ArtistController artistController = new ArtistController(artistDAO);
-                
+
                 ReleaseDAO releaseDAO = new ReleaseDAO();
                 ReleaseController releaseController = new ReleaseController(releaseDAO);
-                
+
                 TrackDAO trackDAO = new TrackDAO();
                 TrackController trackController = new TrackController(trackDAO);
-                
+
                 JMain jmain = new JMain(artistController, releaseController, trackController);
                 jmain.setVisible(true);
             }
@@ -386,13 +437,15 @@ public class JMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnRepeat;
     private javax.swing.JButton btnShuffle;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnVolume;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
