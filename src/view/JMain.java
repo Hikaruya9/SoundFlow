@@ -5,6 +5,7 @@
 package view;
 
 import controller.ArtistController;
+import controller.MediaController;
 import controller.ReleaseController;
 import controller.TrackController;
 import java.awt.Color;
@@ -30,8 +31,6 @@ public class JMain extends javax.swing.JFrame {
     private ReleaseController releaseController;
     private TrackController trackController;
 
-    private String imageBtnPlay = "/play.png";
-
     /**
      * Creates new form JMain
      */
@@ -40,6 +39,7 @@ public class JMain extends javax.swing.JFrame {
         this.releaseController = releaseController;
         this.trackController = trackController;
         initComponents();
+        initMoreComponents();
     }
 
     /**
@@ -56,7 +56,7 @@ public class JMain extends javax.swing.JFrame {
         pgrBarSong = new javax.swing.JProgressBar();
         btnPlay = new javax.swing.JButton();
         lblTrackImage = new javax.swing.JLabel();
-        txtCurrentTrack = new javax.swing.JTextField();
+        txtCurrentTrackTitle = new javax.swing.JTextField();
         txtCurrentArtist = new javax.swing.JTextField();
         btnPrevious = new javax.swing.JButton();
         btnVolume = new javax.swing.JButton();
@@ -71,6 +71,7 @@ public class JMain extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +95,6 @@ public class JMain extends javax.swing.JFrame {
         pgrBarSong.setBorder(null);
         pgrBarSong.setFocusable(false);
         pgrBarSong.setString("10%");
-        pgrBarSong.setStringPainted(true);
         jPanel1.add(pgrBarSong);
         pgrBarSong.setBounds(410, 695, 460, 7);
 
@@ -106,28 +106,18 @@ public class JMain extends javax.swing.JFrame {
                 btnPlayMouseClicked(evt);
             }
         });
-        btnPlay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnPlay);
         btnPlay.setBounds(620, 645, 35, 35);
         jPanel1.add(lblTrackImage);
         lblTrackImage.setBounds(20, 640, 60, 60);
 
-        txtCurrentTrack.setBackground(new java.awt.Color(5, 5, 5));
-        txtCurrentTrack.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        txtCurrentTrack.setForeground(new java.awt.Color(240, 240, 240));
-        txtCurrentTrack.setText("music title");
-        txtCurrentTrack.setBorder(null);
-        txtCurrentTrack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCurrentTrackActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtCurrentTrack);
-        txtCurrentTrack.setBounds(90, 645, 270, 18);
+        txtCurrentTrackTitle.setBackground(new java.awt.Color(5, 5, 5));
+        txtCurrentTrackTitle.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        txtCurrentTrackTitle.setForeground(new java.awt.Color(240, 240, 240));
+        txtCurrentTrackTitle.setText("music title");
+        txtCurrentTrackTitle.setBorder(null);
+        jPanel1.add(txtCurrentTrackTitle);
+        txtCurrentTrackTitle.setBounds(90, 645, 270, 18);
 
         txtCurrentArtist.setBackground(new java.awt.Color(5, 5, 5));
         txtCurrentArtist.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -145,11 +135,6 @@ public class JMain extends javax.swing.JFrame {
         btnPrevious.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPreviousMouseClicked(evt);
-            }
-        });
-        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPreviousActionPerformed(evt);
             }
         });
         jPanel1.add(btnPrevious);
@@ -223,7 +208,7 @@ public class JMain extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
+            .addGap(0, 519, Short.MAX_VALUE)
         );
 
         jLayeredPane2.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -238,13 +223,14 @@ public class JMain extends javax.swing.JFrame {
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jPanel1.add(jLayeredPane2);
-        jLayeredPane2.setBounds(10, 80, 1260, 540);
+        jLayeredPane2.setBounds(10, 90, 1260, 530);
 
         txtActualTime.setBackground(new java.awt.Color(5, 5, 5));
         txtActualTime.setText("00:00");
@@ -293,6 +279,13 @@ public class JMain extends javax.swing.JFrame {
         jPanel1.add(btnUpdate);
         btnUpdate.setBounds(300, 27, 37, 27);
 
+        jTextField1.setBackground(new java.awt.Color(5, 5, 5));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField1.setText("#");
+        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(20, 70, 30, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -308,66 +301,36 @@ public class JMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-
+        
     }//GEN-LAST:event_txtSearchKeyPressed
 
-    private void txtCurrentTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCurrentTrackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCurrentTrackActionPerformed
-
     private void btnVolumeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolumeMouseClicked
-        if (sldVolume.getValue() != 0) {
-            sldVolume.setValue(0);
-        }
+
     }//GEN-LAST:event_btnVolumeMouseClicked
 
     private void btnRepeatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRepeatMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnRepeatMouseClicked
 
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
-        System.out.println("sim");
+        //Passa pra próxima música da lista atual
+        MediaController.nextSong();
     }//GEN-LAST:event_btnNextMouseClicked
 
     private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
-//        if (!MusicPlayerControl.isTheActualSongComplete()){
-//            
-//        }
-
-        JMusicSong song = new JMusicSong(1, "King Crimson - Epitath", "Epitath", "King Crimson", "In The Court Of The Crimson King");
-        JMusicPlayerList musicList = new JMusicPlayerList();
-        musicList.addSongToPlayerList(song);
-        MusicPlayerControl.initMusicPlayer("C:/Users/Aluno/Documents/res/audio"); // C:/Users/Aluno/Documents/res/audio // E:/Músicas/SoundFlow/audio
-        MusicPlayerControl.loadSongs(musicList);
-
-        if (musicList.size() > 0 && imageBtnPlay.equals("/play.png")) {
-            MusicPlayerControl.playSong();
-            imageBtnPlay = "/pause.png";
-            btnPlay.setIcon(new ImageIcon(this.getClass().getResource(imageBtnPlay)));
-        } else if (imageBtnPlay.equals("/pause.png")) {
-            MusicPlayerControl.stopSong();
-            imageBtnPlay = "/play.png";
-            btnPlay.setIcon(new ImageIcon(this.getClass().getResource(imageBtnPlay)));
-        } else {
-            JOptionPane.showMessageDialog(this, "Você precisa colocar uma música na fila antes de tocar!");
-        }
+        //Pausa-Iniciar-Retorna a música e altera a imagem do btnPlay
+        MediaController.changeLogicButtons();
     }//GEN-LAST:event_btnPlayMouseClicked
 
     private void btnPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPreviousMouseClicked
-        // TODO add your handling code here:
+        //Retorna pra música anterior da lista atual
+        MediaController.prevSong();
     }//GEN-LAST:event_btnPreviousMouseClicked
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-        // TODO add your handling code here:
+        //Mistura a lista de músicas atual em ordem aleatória
+        MediaController.shuffle();
     }//GEN-LAST:event_btnShuffleMouseClicked
-
-    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-
-    }//GEN-LAST:event_btnPlayActionPerformed
-
-    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPreviousActionPerformed
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         JAdd jadd = new JAdd(artistController, releaseController, trackController);
@@ -390,6 +353,11 @@ public class JMain extends javax.swing.JFrame {
         jdelete.setVisible(true);
     }//GEN-LAST:event_btnDeleteMouseClicked
 
+    private void initMoreComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -449,17 +417,14 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTrackImage;
     private javax.swing.JProgressBar pgrBarSong;
     private javax.swing.JSlider sldVolume;
     private javax.swing.JTextField txtActualTime;
     private javax.swing.JTextField txtCurrentArtist;
-    private javax.swing.JTextField txtCurrentTrack;
+    private javax.swing.JTextField txtCurrentTrackTitle;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTotalTime;
     // End of variables declaration//GEN-END:variables
 }
-
-// Trazer uma opção de copiar o id da música diretamente na pesquisa
-//// Fazer com que a página se adapte ao tamanho da tela do usuário.
-////// Funções do visual entram no controller(?)
