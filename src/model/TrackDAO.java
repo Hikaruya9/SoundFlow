@@ -18,15 +18,16 @@ import java.util.ArrayList;
  */
 public class TrackDAO {
     
-    public void add(String title, String trackLength, String audioFile, int artistId, int releaseId){
-        String sql = "INSERT INTO track(title,track_length,audio_file,artist_id,release_id) VALUES(?,?,?,?,?)";
+    public void add(String title, String releaseTitle, String artistName, String trackLength, String audioFile, String coverImagePath){
+        String sql = "INSERT INTO track(title,release_title,artist_name,track_length,audio_file,cover_image_path) VALUES(?,?,?,?,?,?)";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             int i = 1;
             stmt.setString(i++, title);
+            stmt.setString(i++, releaseTitle);
+            stmt.setString(i++, artistName);
             stmt.setString(i++, trackLength);
             stmt.setString(i++, audioFile);
-            stmt.setInt(i++, artistId);
-            stmt.setInt(i++, releaseId);
+            stmt.setString(i++, coverImagePath);
             stmt.executeUpdate();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -35,12 +36,12 @@ public class TrackDAO {
     
     public ArrayList<Track> getById(int id){
         ArrayList<Track> track = new ArrayList();
-        String sql = "SELECT id,title,track_length,audio_file,artist_id,release_id FROM track WHERE id = ?";
+        String sql = "SELECT id,title,release_title,artist_name,track_length,audio_file,cover_image_path FROM track WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("track_length"), rs.getString("audio_file"), rs.getInt("artist_id"), rs.getInt("release_id"));
+                Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("release_title"), rs.getString("artist_name"), rs.getString("track_length"), rs.getString("audio_file"), rs.getString("cover_image_path"));
                 track.add(t);
             }
         }catch(SQLException e){
@@ -51,12 +52,12 @@ public class TrackDAO {
     
     public ArrayList<Track> getByTitle(String title){
         ArrayList<Track> tracks = new ArrayList();
-        String sql = "SELECT id,title,track_length";
+        String sql = "SELECT id,title,release_title,artist_name,track_length,audio_file,cover_image_path FROM track WHERE title LIKE (?)";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setString(1, title);
+            stmt.setString(1, "%"+title+"%");
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("audio_file"), rs.getString("track_length"), rs.getInt("artist_id"), rs.getInt("release_id"));
+                Track t = new Track(rs.getInt("id"), rs.getString("title"), rs.getString("release_title"), rs.getString("artist_name"), rs.getString("track_length"), rs.getString("audio_file"), rs.getString("cover_image_path"));
                 tracks.add(t);
             }
         }catch(SQLException e){
@@ -76,80 +77,16 @@ public class TrackDAO {
         }
     }
     
-    public boolean updateTitle(int id, String title) {
-        String sql = "UPDATE track SET title = ? WHERE id = ?";
+    public boolean updateAll(int id, String title, String releaseTitle, String artistName, String trackLength, String audioFile, String coverImagePath) {
+        String sql = "UPDATE track SET title = ?, release_title = ?, artist_name = ?, track_length = ?, audio_file = ?, cover_image_path = ? WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
             int i = 1;
             stmt.setString(i++, title);
-            stmt.setInt(i++, id);
-            return stmt.executeUpdate() > 0;
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public boolean updateTrackNumber(int id, String trackLength) {
-        String sql = "UPDATE track SET track_length = ? WHERE id = ?";
-        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            int i = 1;
-            stmt.setString(i++, trackLength);
-            stmt.setInt(i++, id);
-            return stmt.executeUpdate() > 0;
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public boolean updateAudioFile(int id, String audioFile) {
-        String sql = "UPDATE track SET audio_file = ? WHERE id = ?";
-        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            int i = 1;
-            stmt.setString(i++, audioFile);
-            stmt.setInt(i++, id);
-            return stmt.executeUpdate() > 0;
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public boolean updateReleaseId(int id, String releaseId) {
-        String sql = "UPDATE track SET release_id = ? WHERE id = ?";
-        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            int i = 1;
-            stmt.setString(i++, releaseId);
-            stmt.setInt(i++, id);
-            return stmt.executeUpdate() > 0;
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public boolean updateArtistId(int id, int artistId) {
-        String sql = "UPDATE track SET artist_id = ? WHERE id = ?";
-        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            int i = 1;
-            stmt.setInt(i++, artistId);
-            stmt.setInt(i++, id);
-            return stmt.executeUpdate() > 0;
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-    
-    public boolean updateAll(int id, String title, String trackLength, String audioFile, int releaseId, int artistId) {
-        String sql = "UPDATE track SET title = ?, track_length = ?, audio_file = ?, release_id = ?, artist_id = ? WHERE id = ?";
-        try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
-            int i = 1;
-            stmt.setString(i++, title);
+            stmt.setString(i++, releaseTitle);
+            stmt.setString(i++, artistName);
             stmt.setString(i++, trackLength);
             stmt.setString(i++, audioFile);
-            stmt.setInt(i++, releaseId);
-            stmt.setInt(i++, artistId);
+            stmt.setString(i++, coverImagePath);
             stmt.setInt(i++, id);
             return stmt.executeUpdate() > 0;
         }catch(SQLException e){

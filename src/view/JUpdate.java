@@ -4,17 +4,11 @@
  */
 package view;
 
-import controller.ArtistController;
-import controller.ReleaseController;
 import controller.TrackController;
-import data.Artist;
-import data.Release;
 import data.Track;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.ArtistDAO;
-import model.ReleaseDAO;
 import model.TrackDAO;
 
 /**
@@ -23,16 +17,12 @@ import model.TrackDAO;
  */
 public class JUpdate extends javax.swing.JFrame {
 
-    private ArtistController artistController;
-    private ReleaseController releaseController;
     private TrackController trackController;
 
     /**
      * Creates new form JAddUpdate
      */
-    public JUpdate(ArtistController artistController, ReleaseController releaseController, TrackController trackController) {
-        this.artistController = artistController;
-        this.releaseController = releaseController;
+    public JUpdate(TrackController trackController) {
         this.trackController = trackController;
         initComponents();
     }
@@ -47,290 +37,51 @@ public class JUpdate extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tabArtist = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtArtistName = new javax.swing.JTextField();
-        txtArtistGenre = new javax.swing.JTextField();
-        txtArtistAvatarPath = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtArtistAbout = new javax.swing.JTextArea();
-        btnArtistUpdateAll = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        txtArtistSearchID = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblArtist = new javax.swing.JTable();
-        btnArtistSearchID = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        txtReleaseTitle = new javax.swing.JTextField();
-        txtReleaseLength = new javax.swing.JTextField();
-        txtReleaseDate = new javax.swing.JTextField();
-        txtReleaseArtistID = new javax.swing.JTextField();
-        txtReleaseTrackNumber = new javax.swing.JTextField();
-        txtReleaseImagePath = new javax.swing.JTextField();
-        btnReleaseUpdateAll = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        txtReleaseSearchID = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblRelease = new javax.swing.JTable();
-        btnReleaseSearchID = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         btnTrackUpdateAll = new javax.swing.JButton();
         txtTrackTitle = new javax.swing.JTextField();
         txtTrackLength = new javax.swing.JTextField();
-        txtTrackArtistID = new javax.swing.JTextField();
-        txtTrackReleaseID = new javax.swing.JTextField();
+        txtTrackArtistName = new javax.swing.JTextField();
+        txtTrackReleaseTitle = new javax.swing.JTextField();
         txtTrackAudioFilePath = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         txtTrackSearchID = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
         tblTrack = new javax.swing.JTable();
         btnTrackSearchID = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        txtTrackCoverImagePath = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
 
-        tabArtist.setBackground(new java.awt.Color(51, 51, 51));
-        tabArtist.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        tabArtist.setToolTipText("");
-        tabArtist.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(10, 10, 10));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(10, 10, 10));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Title");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Name");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Length");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, -1, -1));
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Genre");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Artist Name");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("About");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Release Title");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Avatar Image Path");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
-
-        txtArtistName.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistName.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(txtArtistName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 149, 28));
-
-        txtArtistGenre.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistGenre.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistGenre.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(txtArtistGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 150, 28));
-
-        txtArtistAvatarPath.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistAvatarPath.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistAvatarPath.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(txtArtistAvatarPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 450, 28));
-
-        txtArtistAbout.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistAbout.setColumns(20);
-        txtArtistAbout.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistAbout.setRows(5);
-        txtArtistAbout.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtArtistAbout.setCaretColor(new java.awt.Color(51, 51, 51));
-        jScrollPane1.setViewportView(txtArtistAbout);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 450, 120));
-
-        btnArtistUpdateAll.setBackground(new java.awt.Color(55, 55, 55));
-        btnArtistUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
-        btnArtistUpdateAll.setText("Update All");
-        btnArtistUpdateAll.setFocusable(false);
-        btnArtistUpdateAll.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnArtistUpdateAllMouseClicked(evt);
-            }
-        });
-        jPanel2.add(btnArtistUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 125, -1));
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("ID");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
-
-        txtArtistSearchID.setBackground(new java.awt.Color(51, 51, 51));
-        txtArtistSearchID.setForeground(new java.awt.Color(255, 255, 255));
-        txtArtistSearchID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtArtistSearchID.setPreferredSize(new java.awt.Dimension(70, 26));
-        jPanel2.add(txtArtistSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
-
-        tblArtist.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Name", "Genre", "About", "Avatar Path"
-            }
-        ));
-        jScrollPane2.setViewportView(tblArtist);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 550, 155));
-
-        btnArtistSearchID.setBackground(new java.awt.Color(55, 55, 55));
-        btnArtistSearchID.setText("Search ID");
-        btnArtistSearchID.setFocusable(false);
-        btnArtistSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnArtistSearchIDMouseClicked(evt);
-            }
-        });
-        jPanel2.add(btnArtistSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
-
-        tabArtist.addTab("Artist", jPanel2);
-
-        jPanel3.setBackground(new java.awt.Color(10, 10, 10));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Title");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
-
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Length");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
-
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Release Date");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
-
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Artist ID");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, -1, -1));
-
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Track Number");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
-
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Cover Image Path");
-        jLabel12.setToolTipText("");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
-
-        txtReleaseTitle.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseTitle.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel3.add(txtReleaseTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, 28));
-
-        txtReleaseLength.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseLength.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseLength.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel3.add(txtReleaseLength, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 161, 28));
-
-        txtReleaseDate.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseDate.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseDate.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel3.add(txtReleaseDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 150, 28));
-
-        txtReleaseArtistID.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseArtistID.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseArtistID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtReleaseArtistID.setMinimumSize(new java.awt.Dimension(60, 26));
-        jPanel3.add(txtReleaseArtistID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 70, 28));
-
-        txtReleaseTrackNumber.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseTrackNumber.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseTrackNumber.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel3.add(txtReleaseTrackNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 70, 28));
-
-        txtReleaseImagePath.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseImagePath.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseImagePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel3.add(txtReleaseImagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 430, 28));
-
-        btnReleaseUpdateAll.setBackground(new java.awt.Color(55, 55, 55));
-        btnReleaseUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
-        btnReleaseUpdateAll.setText("Update All");
-        btnReleaseUpdateAll.setFocusable(false);
-        btnReleaseUpdateAll.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReleaseUpdateAllMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnReleaseUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 125, -1));
-
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("ID");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
-
-        txtReleaseSearchID.setBackground(new java.awt.Color(51, 51, 51));
-        txtReleaseSearchID.setForeground(new java.awt.Color(255, 255, 255));
-        txtReleaseSearchID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        txtReleaseSearchID.setPreferredSize(new java.awt.Dimension(70, 26));
-        jPanel3.add(txtReleaseSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
-
-        tblRelease.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Title", "Release Date", "TrackNumber", "Length", "Image Path", "Artist ID"
-            }
-        ));
-        tblRelease.setGridColor(new java.awt.Color(102, 102, 102));
-        jScrollPane3.setViewportView(tblRelease);
-
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 550, 155));
-
-        btnReleaseSearchID.setBackground(new java.awt.Color(55, 55, 55));
-        btnReleaseSearchID.setText("Search ID");
-        btnReleaseSearchID.setFocusable(false);
-        btnReleaseSearchID.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReleaseSearchIDMouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnReleaseSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
-
-        tabArtist.addTab("Release", jPanel3);
-
-        jPanel4.setBackground(new java.awt.Color(10, 10, 10));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Title");
-        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
-
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Length");
-        jPanel4.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
-
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Artist ID");
-        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
-
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Release ID");
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, -1));
-
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Audio File Path");
-        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Audio File Path");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
 
         btnTrackUpdateAll.setBackground(new java.awt.Color(55, 55, 55));
         btnTrackUpdateAll.setForeground(new java.awt.Color(255, 255, 255));
@@ -341,42 +92,42 @@ public class JUpdate extends javax.swing.JFrame {
                 btnTrackUpdateAllMouseClicked(evt);
             }
         });
-        jPanel4.add(btnTrackUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 125, -1));
+        jPanel1.add(btnTrackUpdateAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 125, -1));
 
         txtTrackTitle.setBackground(new java.awt.Color(51, 51, 51));
         txtTrackTitle.setForeground(new java.awt.Color(255, 255, 255));
         txtTrackTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(txtTrackTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 150, 28));
+        jPanel1.add(txtTrackTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 150, 28));
 
         txtTrackLength.setBackground(new java.awt.Color(51, 51, 51));
         txtTrackLength.setForeground(new java.awt.Color(255, 255, 255));
         txtTrackLength.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(txtTrackLength, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 150, 28));
+        jPanel1.add(txtTrackLength, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 150, 28));
 
-        txtTrackArtistID.setBackground(new java.awt.Color(51, 51, 51));
-        txtTrackArtistID.setForeground(new java.awt.Color(255, 255, 255));
-        txtTrackArtistID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(txtTrackArtistID, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 85, 28));
+        txtTrackArtistName.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackArtistName.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackArtistName.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel1.add(txtTrackArtistName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 85, 28));
 
-        txtTrackReleaseID.setBackground(new java.awt.Color(51, 51, 51));
-        txtTrackReleaseID.setForeground(new java.awt.Color(255, 255, 255));
-        txtTrackReleaseID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(txtTrackReleaseID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 85, 28));
+        txtTrackReleaseTitle.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackReleaseTitle.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackReleaseTitle.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel1.add(txtTrackReleaseTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 85, 28));
 
         txtTrackAudioFilePath.setBackground(new java.awt.Color(51, 51, 51));
         txtTrackAudioFilePath.setForeground(new java.awt.Color(255, 255, 255));
         txtTrackAudioFilePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        jPanel4.add(txtTrackAudioFilePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 415, 28));
+        jPanel1.add(txtTrackAudioFilePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 415, 28));
 
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("ID");
-        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, -1, -1));
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("ID");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 410, -1, -1));
 
         txtTrackSearchID.setBackground(new java.awt.Color(51, 51, 51));
         txtTrackSearchID.setForeground(new java.awt.Color(255, 255, 255));
         txtTrackSearchID.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         txtTrackSearchID.setPreferredSize(new java.awt.Dimension(70, 26));
-        jPanel4.add(txtTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+        jPanel1.add(txtTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, -1, -1));
 
         tblTrack.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -389,9 +140,9 @@ public class JUpdate extends javax.swing.JFrame {
                 "Title", "Length", "Audio Path", "Artist ID", "Release ID"
             }
         ));
-        jScrollPane4.setViewportView(tblTrack);
+        jScrollPane5.setViewportView(tblTrack);
 
-        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 550, 155));
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 550, 155));
 
         btnTrackSearchID.setBackground(new java.awt.Color(55, 55, 55));
         btnTrackSearchID.setText("Search ID");
@@ -401,20 +152,22 @@ public class JUpdate extends javax.swing.JFrame {
                 btnTrackSearchIDMouseClicked(evt);
             }
         });
-        jPanel4.add(btnTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
+        jPanel1.add(btnTrackSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, -1, -1));
 
-        tabArtist.addTab("Track", jPanel4);
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Cover Image Path");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabArtist)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabArtist)
-        );
+        txtTrackCoverImagePath.setBackground(new java.awt.Color(51, 51, 51));
+        txtTrackCoverImagePath.setForeground(new java.awt.Color(255, 255, 255));
+        txtTrackCoverImagePath.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        jPanel1.add(txtTrackCoverImagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 415, 28));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("UPDATE TRACK");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 13, 10, 10));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -430,131 +183,48 @@ public class JUpdate extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnArtistSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistSearchIDMouseClicked
-        int id = Integer.valueOf(txtArtistSearchID.getText());
-        fillTableArtist(artistController.getById(id));
-        txtArtistSearchID.setText("");
-    }//GEN-LAST:event_btnArtistSearchIDMouseClicked
-
-    private void btnReleaseSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseSearchIDMouseClicked
-        int id = Integer.valueOf(txtReleaseSearchID.getText());
-        fillTableRelease(releaseController.getById(id));
-        txtReleaseSearchID.setText("");
-    }//GEN-LAST:event_btnReleaseSearchIDMouseClicked
-
-    private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
-        int id = Integer.valueOf(txtTrackSearchID.getText());
-        fillTableTrack(trackController.getById(id));
-        txtTrackSearchID.setText("");
-    }//GEN-LAST:event_btnTrackSearchIDMouseClicked
-
-    private void btnArtistUpdateAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnArtistUpdateAllMouseClicked
-        int id = Integer.valueOf(txtArtistSearchID.getText());
-        String name = txtArtistName.getText();
-        String genre = txtArtistGenre.getText();
-        String about = txtArtistAbout.getText();
-        String avatarPath = txtArtistAvatarPath.getText();
-
-        if (artistController.updateAll(id, name, genre, about, avatarPath)) {
-            JOptionPane.showMessageDialog(this, "Artista atualizado!");
-            fillTableArtist(artistController.getById(id));
-            txtArtistSearchID.setText("");
-            txtArtistName.setText("");
-            txtArtistGenre.setText("");
-            txtArtistAbout.setText("");
-            txtArtistAvatarPath.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "ID não encontrado!");
-        }
-    }//GEN-LAST:event_btnArtistUpdateAllMouseClicked
-
-    private void btnReleaseUpdateAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReleaseUpdateAllMouseClicked
-        int id = Integer.valueOf(txtReleaseSearchID.getText());
-        String title = txtReleaseTitle.getText();
-        String releaseDate = txtReleaseDate.getText();
-        int trackNumber = Integer.valueOf(txtReleaseTrackNumber.getText());
-        String length = txtReleaseLength.getText();
-        String avatarPath = txtArtistAvatarPath.getText();
-        int artistId = Integer.valueOf(txtReleaseArtistID.getText());
-
-        if (releaseController.updateAll(id, title, releaseDate, trackNumber, length, avatarPath, artistId)) {
-            JOptionPane.showMessageDialog(this, "Lançamento atualizado!");
-            fillTableRelease(releaseController.getById(id));
-            txtReleaseSearchID.setText("");
-            txtReleaseTitle.setText("");
-            txtReleaseDate.setText("");
-            txtReleaseTrackNumber.setText("");
-            txtReleaseLength.setText("");
-            txtReleaseImagePath.setText("");
-            txtReleaseArtistID.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "ID não encontrado!");
-        }
-    }//GEN-LAST:event_btnReleaseUpdateAllMouseClicked
-
     private void btnTrackUpdateAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackUpdateAllMouseClicked
         int id = Integer.valueOf(txtTrackSearchID.getText());
         String title = txtTrackTitle.getText();
+        String releaseTitle = txtTrackReleaseTitle.getText();
+        String artistName = txtTrackArtistName.getText();
         String length = txtTrackLength.getText();
         String audioPath = txtTrackAudioFilePath.getText();
-        int releaseId = Integer.valueOf(txtTrackReleaseID.getText());
-        int artistId = Integer.valueOf(txtTrackArtistID.getText());
+        String coverImagePath = txtTrackCoverImagePath.getText();
 
-        if (trackController.updateAll(id, title, length, audioPath, releaseId, artistId)) {
+        if (trackController.updateAll(id, title, releaseTitle, artistName, length, audioPath, coverImagePath)) {
             JOptionPane.showMessageDialog(this, "Música atualizada!");
-            fillTableTrack(trackController.getById(id));
-            txtTrackSearchID.setText("");
-            txtTrackTitle.setText("");
-            txtTrackLength.setText("");
-            txtTrackAudioFilePath.setText("");
-            txtTrackReleaseID.setText("");
-            txtTrackArtistID.setText("");
+            fillTable(trackController.getById(id));
+//            txtTrackSearchID.setText("");
+//            txtTrackTitle.setText("");
+//            txtTrackReleaseTitle.setText("");
+//            txtTrackArtistName.setText("");
+//            txtTrackLength.setText("");
+//            txtTrackAudioFilePath.setText("");
+//            txtTrackCoverImagePath.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "ID não encontrado!");
         }
     }//GEN-LAST:event_btnTrackUpdateAllMouseClicked
 
-    public void fillTableArtist(ArrayList<Artist> artist) {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Name");
-        model.addColumn("Genre");
-        model.addColumn("About");
-        model.addColumn("Image Path");
+    private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
+        int id = Integer.valueOf(txtTrackSearchID.getText());
+        fillTable(trackController.getById(id));
+        txtTrackSearchID.setText("");
+    }//GEN-LAST:event_btnTrackSearchIDMouseClicked
 
-        for (Artist a : artist) {
-            model.addRow(new Object[]{a.getId(), a.getName(), a.getGenre(), a.getAbout(), a.getImagePath()});
-        }
-        tblArtist.setModel(model);
-    }
-
-    public void fillTableRelease(ArrayList<Release> release) {
+    public void fillTable(ArrayList<Track> track) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
         model.addColumn("Title");
-        model.addColumn("Release Date");
-        model.addColumn("Track Number");
-        model.addColumn("Length");
-        model.addColumn("Image Path");
-        model.addColumn("Artist ID");
-
-        for (Release r : release) {
-            model.addRow(new Object[]{r.getId(), r.getTitle(), r.getReleaseDate(), r.getTrackNumber(), r.getLength(), r.getImagePath(), r.getArtistId()});
-        }
-        tblRelease.setModel(model);
-    }
-
-    public void fillTableTrack(ArrayList<Track> track) {
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("Title");
+        model.addColumn("Release");
+        model.addColumn("Artist");
         model.addColumn("Length");
         model.addColumn("Audio File");
-        model.addColumn("Artist ID");
-        model.addColumn("Release ID");
+        model.addColumn("Cover Image Path");
 
         for (Track t : track) {
-            model.addRow(new Object[]{t.getId(), t.getTitle(), t.getTrackLength(), t.getAudioFile(), t.getArtistId(), t.getReleaseId()});
+            model.addRow(new Object[]{t.getId(), t.getTitle(), t.getReleaseTitle(), t.getArtistName(), t.getTrackLength(), t.getAudioFile(), t.getCoverImagePath()});
         }
         tblTrack.setModel(model);
     }
@@ -590,74 +260,34 @@ public class JUpdate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ArtistDAO artistDAO = new ArtistDAO();
-                ArtistController artistController = new ArtistController(artistDAO);
-
-                ReleaseDAO releaseDAO = new ReleaseDAO();
-                ReleaseController releaseController = new ReleaseController(releaseDAO);
-
                 TrackDAO trackDAO = new TrackDAO();
                 TrackController trackController = new TrackController(trackDAO);
 
-                JUpdate jupdate = new JUpdate(artistController, releaseController, trackController);
+                JUpdate jupdate = new JUpdate(trackController);
                 jupdate.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnArtistSearchID;
-    private javax.swing.JButton btnArtistUpdateAll;
-    private javax.swing.JButton btnReleaseSearchID;
-    private javax.swing.JButton btnReleaseUpdateAll;
     private javax.swing.JButton btnTrackSearchID;
     private javax.swing.JButton btnTrackUpdateAll;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane tabArtist;
-    private javax.swing.JTable tblArtist;
-    private javax.swing.JTable tblRelease;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable tblTrack;
-    private javax.swing.JTextArea txtArtistAbout;
-    private javax.swing.JTextField txtArtistAvatarPath;
-    private javax.swing.JTextField txtArtistGenre;
-    private javax.swing.JTextField txtArtistName;
-    private javax.swing.JTextField txtArtistSearchID;
-    private javax.swing.JTextField txtReleaseArtistID;
-    private javax.swing.JTextField txtReleaseDate;
-    private javax.swing.JTextField txtReleaseImagePath;
-    private javax.swing.JTextField txtReleaseLength;
-    private javax.swing.JTextField txtReleaseSearchID;
-    private javax.swing.JTextField txtReleaseTitle;
-    private javax.swing.JTextField txtReleaseTrackNumber;
-    private javax.swing.JTextField txtTrackArtistID;
+    private javax.swing.JTextField txtTrackArtistName;
     private javax.swing.JTextField txtTrackAudioFilePath;
+    private javax.swing.JTextField txtTrackCoverImagePath;
     private javax.swing.JTextField txtTrackLength;
-    private javax.swing.JTextField txtTrackReleaseID;
+    private javax.swing.JTextField txtTrackReleaseTitle;
     private javax.swing.JTextField txtTrackSearchID;
     private javax.swing.JTextField txtTrackTitle;
     // End of variables declaration//GEN-END:variables
