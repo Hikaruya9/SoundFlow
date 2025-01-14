@@ -33,7 +33,6 @@ public class JMain extends javax.swing.JFrame {
     
     TrackController trackController;
     MediaController mediaController;
-    private boolean playButton;
     private JMusicPlayerList musicList;
 
     /**
@@ -350,6 +349,7 @@ public class JMain extends javax.swing.JFrame {
 
     private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
         //Pausa-Inicia-Retorna a música e altera o icone do btnPlay
+        mediaController.initMusicPlayer();
         mediaController.changeLogicButtons();
     }//GEN-LAST:event_btnPlayMouseClicked
 
@@ -397,12 +397,7 @@ public class JMain extends javax.swing.JFrame {
         if (!evt.getValueIsAdjusting()) {
             Track selectedTrack = listSongs.getSelectedValue();
             if (selectedTrack != null) {
-                mediaController.insertSongIntoPlayerList(selectedTrack.getId()); // Insere no Player List o valor do id captado
-                mediaController.initMusicPlayer("E:/Músicas/SoundFlow/audio", musicList); // E:/Músicas/SoundFlow/audio // Inicializa o Music Player
-//                lblCurrentSongTitle.setText(selectedTrack.getTitle());
-//                lblCurrentSongArtist.setText(selectedTrack.getArtistName());
-//                lblTrackImage.setIcon(new javax.swing.ImageIcon(selectedTrack.getCoverImagePath()));
-//                lblTotalSongTime.setText(selectedTrack.getTrackLength());
+                mediaController.insertSongIntoPlayerList(selectedTrack.getId());
             }
         }
     }//GEN-LAST:event_listSongsValueChanged
@@ -417,15 +412,16 @@ public class JMain extends javax.swing.JFrame {
         // Registra quantos cliques foram feitos em um valor da lista
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
-            int index = list.locationToIndex(evt.getPoint()); // Pega o index da música determinado por sua posição na lista
-            mediaController.changeSongFromIndex(index); // 
+            mediaController.initMusicPlayer();
+            mediaController.changeSongFromIndex();
         }
     }//GEN-LAST:event_listQueueMouseClicked
 
     private void initMyOwnComponents() {
+        //Inicializa/modifica componenetes extras que não cabem no principal
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        mediaController.initOutlets(listSongs, listQueue, btnPlay, lblCurrentSongTitle, lblCurrentSongArtist, lblTotalSongTime, lblTrackImage);
+        mediaController.initOutlets(listSongs, listQueue, btnPlay, lblCurrentSongTitle, lblCurrentSongArtist, lblTotalSongTime, lblTrackImage, btnRepeat); //Inicializa as informações na interface trazidas do mediaController
     }
 
     /**

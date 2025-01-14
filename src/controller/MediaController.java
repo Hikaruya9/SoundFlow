@@ -25,11 +25,14 @@ public class MediaController {
 
     private boolean iPressedResumeButton = false;
     private boolean iPressedPauseButton = false;
-    private boolean isActualSongComplete = true;
-    private boolean iMustRepeatASong;
+    private boolean initPlayer = false;
+    private boolean repeatSameSong;
     private int queueIndex;
-    public TrackDAO trackDAO;
+    private int selectedIndex;
+    private TrackDAO trackDAO;
+    private ArrayList<Integer> songIDs = new ArrayList();
     public JMusicPlayerList musicList;
+    public JMusicSong song;
 
     private DefaultListModel<Track> trackModel;
     private DefaultListModel model;
@@ -41,17 +44,21 @@ public class MediaController {
     private JLabel songArtist;
     private JLabel songImage;
     private JLabel songLength;
+    private JButton repeatButton;
 
+    // Construtor
     public MediaController(TrackDAO trackDAO, JMusicPlayerList musicList) {
         this.trackDAO = trackDAO;
         this.musicList = musicList;
     }
 
+    // Construtor limpo
     public MediaController() {
 
     }
 
-    public void initOutlets(JList<Track> listSongs, JList listQueue, JButton playButton, JLabel songTitle, JLabel songArtist, JLabel songImage, JLabel songLength) {
+    // Método para inicializar os objetos gráficos criados
+    public void initOutlets(JList<Track> listSongs, JList listQueue, JButton playButton, JLabel songTitle, JLabel songArtist, JLabel songLength, JLabel songImage, JButton repeatButton) {
         this.listSongs = listSongs;
         this.listQueue = listQueue;
         this.playButton = playButton;
@@ -59,13 +66,10 @@ public class MediaController {
         this.songArtist = songArtist;
         this.songImage = songImage;
         this.songLength = songLength;
+        this.repeatButton = repeatButton;
     }
 
-    /**
-     * Method to change the buttons images
-     *
-     * @since JMusic 1.0.0
-     */
+    // Método para alterar as imagens do PlayButton e altera o estado da música
     public void changeLogicButtons() {
         if (iPressedPauseButton) {
             pauseSong();
@@ -79,27 +83,30 @@ public class MediaController {
             } else {
                 playSong();
                 iPressedResumeButton = true;
+                updateSongInfo();
             }
             playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pause.png")));
             iPressedPauseButton = true;
         }
     }
 
-    public void updateSongInfo(JMusicSong song) {
+    // Método que atualiza as informações da música tocada no JMain
+    public void updateSongInfo() {
 //        songTitle.setText(song.getSongName());
 //        songArtist.setText(song.getArtist());
 //        songImage.setIcon(new javax.swing.ImageIcon("E:/Músicas/SoundFlow/cover/" + song.getArtist() + "/" + song.getAlbum() + ".png"));
 
-//        ArrayList<Track> track = trackDAO.getById(id);
-//
-//        for (Track t : track) {
-//        songTitle.setText(t.getTitle());
-//        songArtist.setText(t.getArtistName());
-//        songImage.setIcon(new javax.swing.ImageIcon(t.getCoverImagePath()));
-//            songLength.setText(t.getTrackLength());
-//        }
+        ArrayList<Track> track = trackDAO.getById(songIDs.get(selectedIndex));
+
+        for (Track t : track) {
+            songTitle.setText(t.getTitle());
+            songArtist.setText(t.getArtistName());
+            songLength.setText(t.getTrackLength());
+            songImage.setIcon(new javax.swing.ImageIcon(t.getCoverImagePath()));
+        }
     }
 
+    //Método para trazer as músicas do BD à lista de pesquisa
     public void insertSongIntoList(String title) {
         trackModel = new DefaultListModel();
 
@@ -109,130 +116,140 @@ public class MediaController {
         listSongs.setModel(trackModel);
     }
 
+    //Método para inserir a música obtida à lista no JMusicPlayerList
     public void insertSongIntoPlayerList(int id) {
+        songIDs.add(id);
         model = new DefaultListModel();
         ArrayList<Track> track = trackDAO.getById(id);
 
         for (Track t : track) {
-            JMusicSong song = new JMusicSong(queueIndex, t.getAudioFile(), t.getTitle(), t.getArtistName(), t.getReleaseTitle());
-            musicList.addSongToPlayerList(song);
+            song = new JMusicSong(queueIndex, t.getAudioFile(), t.getTitle(), t.getArtistName(), t.getReleaseTitle());
         }
+        musicList.addSongToPlayerList(song);
         insertSongsIntoQueue();
     }
 
+    //Método para inserir as músicas na lista a ser tocada
     public void insertSongsIntoQueue() {
         Iterator listPlayerIterator = musicList.iterator();
         queueIndex = 0;
 
         while (listPlayerIterator.hasNext()) {
-            JMusicSong song = (JMusicSong) listPlayerIterator.next();
+            song = (JMusicSong) listPlayerIterator.next();
 
             int numberSong = song.getNumberSong() + 1;
-            String info = " " + (numberSong) + "    " + song.getSongName() + " - " + song.getArtist();
+            String info = " " + numberSong + "    " + song.getSongName() + " - " + song.getArtist();
             model.add(queueIndex, info);
             queueIndex++;
         }
         listQueue.setModel(model);
     }
 
+    // Método pra limpar a PlayerList atual
     public void clearPlayerList() {
         musicList = new JMusicPlayerList();
+        initPlayer = false;
     }
 
+    // Método para limpar a lista de músicas atual
     public void clearQueue() {
-//        stopSong();
-        queueIndex = 0;
-
-        model = (DefaultListModel) listQueue.getModel();
         model.removeAllElements();
-    }
+        listQueue.setModel(model);
+        songIDs.removeAll(songIDs);
 
-    public void changeSongFromIndex(int indexSong) {
         stopSong();
-        MusicPlayerControl.changeSongFromIndexSong(indexSong);
     }
 
-    public void initMusicPlayer(String directory, JMusicPlayerList songsList) {
-        /* init the music player with the path of the mp3 songs */
-        MusicPlayerControl.initMusicPlayer(directory, listSongs);
-
-        musicList = songsList;
-
-//        loadSongsInList();
-        MusicPlayerControl.loadSongs(musicList);
+    // Método para mudar a música a ser tocada
+    public void changeSongFromIndex() {
+        stopSong();
+        selectedIndex = listQueue.getSelectedIndex();
+        MusicPlayerControl.changeSongFromIndexSong(selectedIndex);
+        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pause.png")));
+        iPressedPauseButton = false;
+        iPressedResumeButton = true;
+        updateSongInfo();
     }
 
-    /**
-     * Method to play a song
-     */
+    // Método que inicializa o JMusicPlayerList
+    public void initMusicPlayer() {
+        if (!initPlayer) {
+            /* Inicializa o MusicPlayer com o caminho pro diretório das músicas MP3 */
+            MusicPlayerControl.initMusicPlayer("C:/Users/Aluno/Documents/res/audio", listQueue); //E:/Músicas/SoundFlow/audio //Inicializa a lista de onde as músicas estão sendo obtidas
+
+            MusicPlayerControl.loadSongs(musicList);
+
+            inactiveRepeatSong();
+
+            initPlayer = !initPlayer;
+        }
+    }
+
+    // Método para tocar a música selecionada da lista
     public void playSong() {
         MusicPlayerControl.playSong();
     }
 
-    /**
-     * Method to stop a song
-     */
+    // Método para parar a música atual
     public void stopSong() {
-        MusicPlayerControl.stopSong();
-        iPressedResumeButton = false;
-        iPressedPauseButton = false;
-        playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png")));
+        if (initPlayer) {
+            MusicPlayerControl.stopSong();
+
+            iPressedResumeButton = false;
+            iPressedPauseButton = false;
+            playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png")));
+        }
     }
 
-    /**
-     * Method to pause a song
-     */
+    // Método para pausar a música atual
     public void pauseSong() {
         MusicPlayerControl.pauseSong();
     }
 
-    /**
-     * Method to resume a song
-     */
+    // Método para parar o MusicThread
+    public void shutdownPlayer() {
+        MusicPlayerControl.shutdown();
+    }
+
+    // Método para retomar a música atual
     public void resumeSong() {
         MusicPlayerControl.resumeSong();
     }
 
-    /**
-     * Method to play the song
-     */
+    // Método para prosseguir à música posterior na lista atual
     public void nextSong() {
         inactiveRepeatSong();
-        MusicPlayerControl.repeatSong(iMustRepeatASong);
+        MusicPlayerControl.repeatSong(repeatSameSong);
         stopSong();
         MusicPlayerControl.nextSong();
     }
 
-    /**
-     * Method to play the prev song
-     */
+    // Método para voltar à música anterior na lista atual
     public void prevSong() {
         inactiveRepeatSong();
-        MusicPlayerControl.repeatSong(iMustRepeatASong);
+        MusicPlayerControl.repeatSong(repeatSameSong);
         stopSong();
         MusicPlayerControl.prevSong();
     }
 
-    /**
-     * Method to inactive the repeat song process
-     */
+    // Método para desativar a reptição da música
     private void inactiveRepeatSong() {
-        iMustRepeatASong = false;
-        MusicPlayerControl.repeatSong(iMustRepeatASong);
+        repeatSameSong = false;
+        MusicPlayerControl.repeatSong(repeatSameSong);
     }
 
-    /**
-     * Method to repeat the actual song
-     */
+    // Método para repetir a música tocando
     public void repeatSong() {
-        iMustRepeatASong = !iMustRepeatASong;
-        MusicPlayerControl.repeatSong(iMustRepeatASong);
-
+        repeatSameSong = !repeatSameSong;
+        MusicPlayerControl.repeatSong(repeatSameSong);
+        if (repeatSameSong) {
+            repeatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/repeatActive.png")));
+        } else {
+            repeatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/repeat.png")));
+        }
     }
 
-    /**
-     * Method to shuffle the list of songs
-     */
+    // Método para embaralhar a lista de músicas
     public void shuffle() {
         musicList.shuffle();
 
@@ -241,7 +258,7 @@ public class MediaController {
         clearQueue();
 
         insertSongsIntoQueue();
-
+        
         MusicPlayerControl.updateSelectedSongInList();
     }
 }
