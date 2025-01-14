@@ -336,35 +336,35 @@ public class JMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchTrackKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchTrackKeyPressed
-       //Faz a pesquina no banco de dados pelo nome digitado ao pressionar ENTER
+       // Faz a pesquina no banco de dados pelo nome digitado ao pressionar ENTER
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             mediaController.insertSongIntoList(txtSearchTrack.getText());
         }
     }//GEN-LAST:event_txtSearchTrackKeyPressed
 
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
-        //Passa pra próxima música da lista atual
+        // Passa pra próxima música da lista atual
         mediaController.nextSong();
     }//GEN-LAST:event_btnNextMouseClicked
 
     private void btnPlayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPlayMouseClicked
-        //Pausa-Inicia-Retorna a música e altera o icone do btnPlay
+        // Pausa-Inicia-Retorna a música e altera o icone do btnPlay
         mediaController.initMusicPlayer();
         mediaController.changeLogicButtons();
     }//GEN-LAST:event_btnPlayMouseClicked
 
     private void btnPreviousMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPreviousMouseClicked
-        //Retorna pra música anterior da lista atual
+        // Retorna pra música anterior da lista atual
         mediaController.prevSong();
     }//GEN-LAST:event_btnPreviousMouseClicked
 
     private void btnShuffleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShuffleMouseClicked
-        //Mistura a lista de músicas atual em ordem aleatória
+        // Mistura a lista de músicas atual em ordem aleatória
         mediaController.shuffle();
     }//GEN-LAST:event_btnShuffleMouseClicked
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        //Abre uma janela para adicionar um valor ao banco de dados
+        // Abre uma janela para adicionar um valor ao banco de dados
         JAdd jadd = new JAdd(trackController);
         jadd.setLocationRelativeTo(jadd);
         jadd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -372,7 +372,7 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
-        // Abre uma janela para atualizar um valor ao banco de dados
+        // Abre uma janela para atualizar um valor do banco de dados
         JUpdate jupdate = new JUpdate(trackController);
         jupdate.setLocationRelativeTo(jupdate);
         jupdate.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -380,7 +380,7 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
-        //Abre uma janela para remover um valor ao banco de dados
+        // Abre uma janela para remover um valor do banco de dados
         JDelete jdelete = new JDelete(trackController);
         jdelete.setLocationRelativeTo(jdelete);
         jdelete.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -388,12 +388,12 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteMouseClicked
 
     private void btnRepeatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRepeatMouseClicked
-        //Repete a música atual
+        // Repete a música atual
         mediaController.repeatSong();
     }//GEN-LAST:event_btnRepeatMouseClicked
 
     private void listSongsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSongsValueChanged
-        //Capta o valor do id atribuido ao valor da lista
+        // Capta o valor do id atribuido ao valor da lista
         if (!evt.getValueIsAdjusting()) {
             Track selectedTrack = listSongs.getSelectedValue();
             if (selectedTrack != null) {
@@ -403,7 +403,7 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_listSongsValueChanged
 
     private void btnClearQueueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearQueueMouseClicked
-        //Limpa a lista atual
+        // Limpa a lista atual
         mediaController.clearQueue();
         mediaController.clearPlayerList();
     }//GEN-LAST:event_btnClearQueueMouseClicked
@@ -418,10 +418,11 @@ public class JMain extends javax.swing.JFrame {
     }//GEN-LAST:event_listQueueMouseClicked
 
     private void initMyOwnComponents() {
-        //Inicializa/modifica componenetes extras que não cabem no principal
+        // Inicializa|modifica componenetes extras que não cabem no principal
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         mediaController.initOutlets(listSongs, listQueue, btnPlay, lblCurrentSongTitle, lblCurrentSongArtist, lblTotalSongTime, lblTrackImage, btnRepeat); //Inicializa as informações na interface trazidas do mediaController
+        mediaController.insertSongIntoList(txtSearchTrack.getText());
     }
 
     /**

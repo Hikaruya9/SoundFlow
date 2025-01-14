@@ -146,21 +146,16 @@ public class JDelete extends javax.swing.JFrame {
     private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
         int id = Integer.valueOf(txtTrackDeleteID.getText());
         fillTable(trackController.getById(id));
-//        txtTrackDeleteID.setText("");
     }//GEN-LAST:event_btnTrackSearchIDMouseClicked
     
     public void fillTable(ArrayList<Track> track) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
         model.addColumn("Title");
-        model.addColumn("Release");
         model.addColumn("Artist");
-        model.addColumn("Length");
-        model.addColumn("Audio File");
-        model.addColumn("Cover Image Path");
 
         for (Track t : track) {
-            model.addRow(new Object[]{t.getId(), t.getTitle(), t.getReleaseTitle(), t.getArtistName(), t.getTrackLength(), t.getAudioFile(), t.getCoverImagePath()});
+            model.addRow(new Object[]{t.getId(), t.getTitle(), t.getArtistName()});
         }
         tblTrack.setModel(model);
     }

@@ -195,13 +195,6 @@ public class JUpdate extends javax.swing.JFrame {
         if (trackController.updateAll(id, title, releaseTitle, artistName, length, audioPath, coverImagePath)) {
             JOptionPane.showMessageDialog(this, "Música atualizada!");
             fillTable(trackController.getById(id));
-//            txtTrackSearchID.setText("");
-//            txtTrackTitle.setText("");
-//            txtTrackReleaseTitle.setText("");
-//            txtTrackArtistName.setText("");
-//            txtTrackLength.setText("");
-//            txtTrackAudioFilePath.setText("");
-//            txtTrackCoverImagePath.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "ID não encontrado!");
         }
@@ -210,7 +203,6 @@ public class JUpdate extends javax.swing.JFrame {
     private void btnTrackSearchIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTrackSearchIDMouseClicked
         int id = Integer.valueOf(txtTrackSearchID.getText());
         fillTable(trackController.getById(id));
-        txtTrackSearchID.setText("");
     }//GEN-LAST:event_btnTrackSearchIDMouseClicked
 
     public void fillTable(ArrayList<Track> track) {
