@@ -125,6 +125,7 @@ public class MediaController {
             song = new JMusicSong(queueIndex, t.getAudioFile(), t.getTitle(), t.getArtistName(), t.getReleaseTitle());
         }
         musicList.addSongToPlayerList(song);
+        listSongs.clearSelection();
         insertSongsIntoQueue();
     }
 
@@ -155,6 +156,7 @@ public class MediaController {
         if (musicList.size() > 0) {
             model.removeAllElements();
             listQueue.setModel(model);
+            listSongs.clearSelection();
             songIDs.removeAll(songIDs);
             queueIndex = 0;
             selectedIndex = 0;
@@ -169,8 +171,8 @@ public class MediaController {
         selectedIndex = listQueue.getSelectedIndex();
         MusicPlayerControl.changeSongFromIndexSong(selectedIndex);
         playButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pause.png")));
-        iPressedPauseButton = false;
-        iPressedResumeButton = true;
+        iPressedPauseButton = true;
+        iPressedResumeButton = false;
         updateSongInfo();
     }
 
@@ -181,7 +183,7 @@ public class MediaController {
             *
             * "C:/Users/Aluno/Documents/res/audio" || //"E:/Músicas/SoundFlow/audio"
              */
-            MusicPlayerControl.initMusicPlayer("E:/Músicas/SoundFlow/audio", listQueue);
+            MusicPlayerControl.initMusicPlayer("C:/Users/Aluno/Documents/res/audio", listQueue);
 
             MusicPlayerControl.loadSongs(musicList);
 

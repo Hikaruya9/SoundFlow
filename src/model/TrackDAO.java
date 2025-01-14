@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class TrackDAO {
     
+    // Insere uma música no BD
     public void add(String title, String releaseTitle, String artistName, String trackLength, String audioFile, String coverImagePath){
         String sql = "INSERT INTO track(title,release_title,artist_name,track_length,audio_file,cover_image_path) VALUES(?,?,?,?,?,?)";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -34,6 +35,7 @@ public class TrackDAO {
         }
     }
     
+    // Busca uma música pelo ID no BD
     public ArrayList<Track> getById(int id){
         ArrayList<Track> track = new ArrayList();
         String sql = "SELECT id,title,release_title,artist_name,track_length,audio_file,cover_image_path FROM track WHERE id = ?";
@@ -50,6 +52,7 @@ public class TrackDAO {
         return track;
     }
     
+    // Busca uma música pelo título no BD
     public ArrayList<Track> getByTitle(String title){
         ArrayList<Track> tracks = new ArrayList();
         String sql = "SELECT id,title,release_title,artist_name,track_length,audio_file,cover_image_path FROM track WHERE title LIKE (?)";
@@ -66,6 +69,7 @@ public class TrackDAO {
         return tracks;
     }
     
+    // Busca uma música pelo título, nome do album, nome do artista no BD
     public ArrayList<Track> getByInfo(String title, String releaseTitle, String artistName){
         ArrayList<Track> tracks = new ArrayList();
         String sql = "SELECT id,title,release_title,artist_name,track_length,audio_file,cover_image_path FROM track WHERE title = ? AND release_title = ? AND artist_name = ?";
@@ -85,6 +89,7 @@ public class TrackDAO {
         return tracks;
     }
     
+    // Deleta uma música do BD pelo id
     public boolean delete(int id){
         String sql = "DELETE FROM track WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -96,6 +101,7 @@ public class TrackDAO {
         }
     }
     
+    // Atualiza todas as informações de uma música no BD
     public boolean updateAll(int id, String title, String releaseTitle, String artistName, String trackLength, String audioFile, String coverImagePath) {
         String sql = "UPDATE track SET title = ?, release_title = ?, artist_name = ?, track_length = ?, audio_file = ?, cover_image_path = ? WHERE id = ?";
         try(Connection conn = DB.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)){

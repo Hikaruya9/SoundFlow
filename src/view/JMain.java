@@ -8,21 +8,8 @@ import controller.MediaController;
 import controller.TrackController;
 import data.Track;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.imageio.ImageIO;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 import jmusic.JMusicPlayerList;
-import jmusic.JMusicSong;
-import jmusic.MusicPlayerControl;
 import model.TrackDAO;
 
 /**
@@ -57,22 +44,18 @@ public class JMain extends javax.swing.JFrame {
 
         pnlBackground = new javax.swing.JPanel();
         txtSearchTrack = new javax.swing.JTextField();
-        pgrBarSong = new javax.swing.JProgressBar();
         btnPlay = new javax.swing.JButton();
         lblTrackImage = new javax.swing.JLabel();
         btnRepeat = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
-        btnVolume = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnShuffle = new javax.swing.JButton();
-        sldVolume = new javax.swing.JSlider();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         listSongs = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         listQueue = new javax.swing.JList<>();
         lblTotalSongTime = new javax.swing.JLabel();
-        lblActualSongTime = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -98,14 +81,6 @@ public class JMain extends javax.swing.JFrame {
         });
         pnlBackground.add(txtSearchTrack);
         txtSearchTrack.setBounds(410, 20, 460, 40);
-
-        pgrBarSong.setBackground(new java.awt.Color(30, 30, 30));
-        pgrBarSong.setForeground(new java.awt.Color(255, 255, 255));
-        pgrBarSong.setBorder(null);
-        pgrBarSong.setFocusable(false);
-        pgrBarSong.setString("10%");
-        pnlBackground.add(pgrBarSong);
-        pgrBarSong.setBounds(410, 695, 460, 7);
 
         btnPlay.setBackground(new java.awt.Color(255, 255, 255));
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png"))); // NOI18N
@@ -145,16 +120,6 @@ public class JMain extends javax.swing.JFrame {
         pnlBackground.add(btnPrevious);
         btnPrevious.setBounds(570, 650, 30, 28);
 
-        btnVolume.setBackground(new java.awt.Color(5, 5, 5));
-        btnVolume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volume2.png"))); // NOI18N
-        btnVolume.setBorder(null);
-        btnVolume.setBorderPainted(false);
-        btnVolume.setContentAreaFilled(false);
-        btnVolume.setFocusPainted(false);
-        btnVolume.setFocusable(false);
-        pnlBackground.add(btnVolume);
-        btnVolume.setBounds(1020, 660, 30, 28);
-
         btnNext.setBackground(new java.awt.Color(5, 5, 5));
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/next.png"))); // NOI18N
         btnNext.setBorder(null);
@@ -180,10 +145,6 @@ public class JMain extends javax.swing.JFrame {
         });
         pnlBackground.add(btnShuffle);
         btnShuffle.setBounds(520, 650, 30, 28);
-
-        sldVolume.setFocusable(false);
-        pnlBackground.add(sldVolume);
-        sldVolume.setBounds(1050, 662, 200, 22);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -249,14 +210,7 @@ public class JMain extends javax.swing.JFrame {
         lblTotalSongTime.setText("-:--");
         lblTotalSongTime.setFocusable(false);
         pnlBackground.add(lblTotalSongTime);
-        lblTotalSongTime.setBounds(880, 690, 37, 16);
-
-        lblActualSongTime.setBackground(new java.awt.Color(5, 5, 5));
-        lblActualSongTime.setForeground(new java.awt.Color(140, 140, 140));
-        lblActualSongTime.setText("-:--");
-        lblActualSongTime.setFocusable(false);
-        pnlBackground.add(lblActualSongTime);
-        lblActualSongTime.setBounds(380, 690, 18, 16);
+        lblTotalSongTime.setBounds(90, 685, 37, 16);
 
         btnDelete.setBackground(new java.awt.Color(50, 50, 50));
         btnDelete.setText("D");
@@ -478,20 +432,16 @@ public class JMain extends javax.swing.JFrame {
     private javax.swing.JButton btnRepeat;
     private javax.swing.JButton btnShuffle;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton btnVolume;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblActualSongTime;
     private javax.swing.JLabel lblCurrentSongArtist;
     private javax.swing.JLabel lblCurrentSongTitle;
     private javax.swing.JLabel lblTotalSongTime;
     private javax.swing.JLabel lblTrackImage;
     private javax.swing.JList<String> listQueue;
     private javax.swing.JList<Track> listSongs;
-    private javax.swing.JProgressBar pgrBarSong;
     private javax.swing.JPanel pnlBackground;
-    private javax.swing.JSlider sldVolume;
     private javax.swing.JTextField txtSearchTrack;
     // End of variables declaration//GEN-END:variables
 }
