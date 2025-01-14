@@ -3,6 +3,7 @@ DEFAULT CHARACTER SET utf8mb4
 DEFAULT COLLATE utf8mb4_general_ci;
 
 USE soundflow;
+DROP DATABASE soundflow;
 
 CREATE TABLE track(
 id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
